@@ -10,11 +10,13 @@
 <def tag="card" for="Task">
   <base-card merge>
     <creation-details: replace/>
+    <before-edit-link:>
+      <delete-button label="Done"/>
+    </before-edit-link:>
     <after-content:>
       <div class="users">
-        Assgined to: <repeat:users join=", "><a><You/></a></repeat>
+        Assigned to: <repeat:users join=", "><a><You/></a></repeat>
       </div>
-      <delete-button label="Done"/>
     </after-content:>
   </base-card>
 </def>
