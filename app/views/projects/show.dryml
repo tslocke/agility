@@ -7,7 +7,7 @@
           Display by status: <filter-menu param-name="status" options="&StoryStatus.all"/>
         </div>
       </prepend-header:>
-      <empty-message:>No stoires match your criteria</empty-message:>
+      <empty-message:>No stories match your criteria</empty-message:>
 
     </table-plus>
   </primary-collection:>
