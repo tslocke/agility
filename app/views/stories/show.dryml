@@ -1,0 +1,7 @@
+<show-page>
+  
+  <field-list: replace>
+    <div class="status">Status: <editor:status/></div>
+  </field-list:>
+
+</show-page>

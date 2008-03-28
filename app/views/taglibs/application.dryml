@@ -1,0 +1,20 @@
+<!-- Define your application-wide tags here -->
+
+<include src="rapid" plugin="hobo"/>
+
+<set-theme name="clean"/>
+
+<def tag="app-name">Agility</def>
+
+
+<def tag="card" for="Task">
+  <base-card merge>
+    <creation-details: replace/>
+    <after-content:>
+      <div class="users">
+        Assgined to: <repeat:users join=", "><a><You/></a></repeat>
+      </div>
+      <delete-button label="Done"/>
+    </after-content:>
+  </base-card>
+</def>

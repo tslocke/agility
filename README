@@ -1,0 +1,6 @@
+Agility
+
+This is the app for the Hobo Tutorial at the Ruby Fools conference in Copenhagen
+
+It's a simple app for managing an agile development process. It tracks
+stories, tasks and assignments of tasks to users.
