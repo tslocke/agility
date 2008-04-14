@@ -7,7 +7,10 @@
     <section class="welcome-message">
       <h3>Agile methods need agile tools</h3>
       
-      <p>Agility is an agile project manager. It's a place to keep track of all your user stories, and the tasks associated with them. Tasks can be assigned to team members, so you always know who's supposed to be doing what.</p>
+      <p>Agility is an agile project manager. It's a place to keep
+      track of all your user stories, and the tasks associated with
+      them. Tasks can be assigned to team members, so you always know
+      who's supposed to be doing what.</p>
     </section>
   </content-header>
 
