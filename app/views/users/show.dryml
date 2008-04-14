@@ -1,6 +1,6 @@
 <show-page>
   <content-body:>
-    <h2>Assigned Tasks</h2>
+    <h2><Your/> Assigned Tasks</h2>
     <repeat with="&this.tasks.group_by(&:story)">
       <h3><a with="&this_key"/></h3>
       <collection class="tasks"/>
