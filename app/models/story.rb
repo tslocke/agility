@@ -25,11 +25,11 @@ class Story < ActiveRecord::Base
   end
 
   def updatable_by?(user, new)
-    !user.guest?
+    !user.guest? && same_fields?(new, :project)
   end
 
   def deletable_by?(user)
-    user.administrator?
+    !user.guest?
   end
 
   def viewable_by?(user, field)

@@ -13,10 +13,7 @@ class User < ActiveRecord::Base
   has_many :task_assignments, :dependent => :destroy
   has_many :tasks, :through => :task_assignments
   
-  def assigned_stories
-    Story.with_tasks(*tasks).all
-  end
-  
+
   # --- Hobo Permissions --- #
 
   # It is possible to override the permission system entirely by
@@ -24,7 +21,7 @@ class User < ActiveRecord::Base
   # def super_user?; true; end
 
   def creatable_by?(creator)
-    true
+    !administrator? || creator.administrator?
   end
 
   def updatable_by?(updater, new)
