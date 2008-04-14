@@ -8,15 +8,18 @@
 
 
 <def tag="card" for="Task">
-  <base-card merge>
-    <creation-details: replace/>
-    <before-edit-link:>
-      <delete-button label="Done"/>
-    </before-edit-link:>
-    <after-content:>
+  <base-card>
+    <creation-details: replace>
       <div class="users">
-        Assigned to: <repeat:users join=", "><a><You/></a></repeat>
+        Assigned users: <repeat:users join=", "><a/></repeat:users><else>None</else>
       </div>
-    </after-content:>
+    </creation-details:>
   </base-card>
 </def>
+
+<def tag="card" for="StoryStatus">
+  <base-card>
+    <creation-details: replace/>
+  </base-card>
+</def>
+
