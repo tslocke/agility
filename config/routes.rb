@@ -1,14 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :task_assignments
-
-  map.resources :tasks
-
-  map.resources :story_statuses
-
-  map.resources :projects
-
-  map.resources :stories
-
 
   map.site_search  'search', :controller => 'front', :action => 'search'
   map.homepage '', :controller => 'front', :action => 'index'
