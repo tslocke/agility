@@ -15,7 +15,20 @@
   </content-header>
 
   <content-body:>
-    <collection-preview with="&Project"/>
+    <if test="&logged_in?" with="&current_user">
+      <collection-preview:owned_projects>
+        <heading:>Your Projects</heading:>
+        <empty-message:>You haven't started any projects yet.</empty-message:>
+      </collection-preview>
+      
+      <collection-preview:projects>
+        <heading:>Projects you have joined</heading:>
+        <empty-message:>You haven't joined any projects yet.</empty-message:>
+      </collection-preview>
+    </if>
+    <else>
+      <p class="login-advert">Please <a href="&login_url">log in </a> or <a href="&signup_url">sign up.</a></p>
+    </else>
   </content-body>
   
 </page>

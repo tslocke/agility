@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   hobo_model_controller
 
-  auto_actions :all
+  auto_actions :show, :edit, :update, :destroy, :new_story, :create_story
   
   def show
     @project = find_instance

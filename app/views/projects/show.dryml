@@ -1,4 +1,9 @@
-<show-page>
+<show-page layout="aside">
+
+  <aside:>
+    <h2>Project Members</h2>
+    <collection:memberships/>
+  </aside:>
 
   <primary-collection:>
     <table-plus fields="this, status">
@@ -7,7 +12,6 @@
           Display by status: <filter-menu param-name="status" options="&StoryStatus.all"/>
         </div>
       </prepend-header:>
-      <empty-message:>No stories match your criteria</empty-message:>
 
     </table-plus>
   </primary-collection:>

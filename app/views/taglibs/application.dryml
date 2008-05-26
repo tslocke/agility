@@ -23,3 +23,12 @@
   </base-card>
 </def>
 
+
+<def tag="card" for="ProjectMembership">
+  <set membership="&this"/>
+  <base-card:user>
+    <creation-details: replace>
+      Contributor: <editor:contributor with="&membership"/>
+    </creation-details:>
+  </base-card:user>
+</def>

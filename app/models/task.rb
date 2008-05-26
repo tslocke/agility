@@ -10,6 +10,8 @@ class Task < ActiveRecord::Base
   acts_as_list :scope => :story
   
   belongs_to :story
+  
+  delegate :project, :writable_by?, :to => :story
 
   has_many :task_assignments, :dependent => :destroy
   has_many :users, :through => :task_assignments, :managed => true
@@ -18,23 +20,23 @@ class Task < ActiveRecord::Base
   # --- Hobo Permissions --- #
 
   def creatable_by?(user)
-    !user.guest? && position.nil?
+    writable_by?(user) && position.nil?
   end
   
   def users_editable_by?(user)
-    !user.guest?
+    writable_by?(user)
   end
 
   def updatable_by?(user, new)
-    !user.guest? && story == new.story
+    writable_by?(user) && story == new.story
   end
 
   def deletable_by?(user)
-    !user.guest?
+    writable_by?(user)
   end
 
   def viewable_by?(user, field)
-    true
+    story.viewable_by?(user)
   end
 
 end

@@ -11,8 +11,17 @@ class User < ActiveRecord::Base
 
   set_admin_on_first_user
   
+  has_many :owned_projects, :class_name => "Project", :foreign_key => "owner_id"
+  
+  has_many :project_memberships
+  has_many :projects, :through => :project_memberships
+  
   has_many :task_assignments, :dependent => :destroy
   has_many :tasks, :through => :task_assignments
+  
+  def all_projects
+    owned_projects + projects
+  end
   
 
   # --- Hobo Permissions --- #

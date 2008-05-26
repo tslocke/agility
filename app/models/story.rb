@@ -13,27 +13,31 @@ class Story < ActiveRecord::Base
   belongs_to :status, :class_name => "StoryStatus", :foreign_key => "status_id"
 
   has_many :tasks, :order => 'position', :dependent => :destroy
+
+  def writable_by?(user)
+    project.accepts_changes_from?(user)
+  end
   
   # --- Hobo Permissions --- #
 
   def creatable_by?(user)
-    !user.guest?
+    writable_by?(user)
   end
   
   def status_editable_by?(user)
-    !user.guest?
+    writable_by?(user)
   end
 
   def updatable_by?(user, new)
-    !user.guest? && same_fields?(new, :project)
+    writable_by?(user) && same_fields?(new, :project)
   end
 
   def deletable_by?(user)
-    !user.guest?
+    writable_by?(user)
   end
 
-  def viewable_by?(user, field)
-    true
+  def viewable_by?(user, field=nil)
+    project.viewable_by?(user)
   end
 
 end

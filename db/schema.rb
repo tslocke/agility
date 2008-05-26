@@ -9,12 +9,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 4) do
+ActiveRecord::Schema.define(:version => 6) do
+
+  create_table "project_memberships", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "contributor"
+    t.integer  "project_id"
+    t.integer  "user_id"
+  end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "owner_id"
   end
 
   create_table "stories", :force => true do |t|
