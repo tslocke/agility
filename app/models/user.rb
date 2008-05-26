@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   fields do
     username :string, :login => true, :name => true
+    email_address :email_address
     administrator :boolean, :default => false
     timestamps
   end
