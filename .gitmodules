@@ -1,0 +1,3 @@
+[submodule "vendor/hobo"]
+	path = vendor/hobo
+	url = git://github.com/tablatom/hobo.git
