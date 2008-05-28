@@ -9,9 +9,10 @@ class Project < ActiveRecord::Base
   
   belongs_to :owner, :class_name => "User", :creator => true
   
-  has_many :memberships, :class_name => "ProjectMembership", :dependent => :destroy
-  has_many :contributor_memberships, :class_name => "ProjectMembership", :scope => :contributor
   has_many :members, :through => :memberships, :source => :user, :managed => true
+  has_many :memberships, :class_name => "ProjectMembership", :dependent => :destroy
+
+  has_many :contributor_memberships, :class_name => "ProjectMembership", :scope => :contributor
   has_many :contributors, :through => :contributor_memberships, :source => :user
 
   has_many :stories, :dependent => :destroy

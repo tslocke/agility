@@ -16,12 +16,13 @@
 
   <content-body:>
     <if test="&logged_in?" with="&current_user">
-      <collection-preview:owned_projects>
+      <collection-preview:projects>
         <heading:>Your Projects</heading:>
         <empty-message:>You haven't started any projects yet.</empty-message:>
-      </collection-preview>
-      
-      <collection-preview:projects>
+      </collection-preview:projects>
+      <p><a with="&Project" action="new">New Project</a></p>
+     
+      <collection-preview:joined-projects>
         <heading:>Projects you have joined</heading:>
         <empty-message:>You haven't joined any projects yet.</empty-message:>
       </collection-preview>

@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   hobo_model_controller
 
-  auto_actions :show, :edit, :update, :destroy, :new_story, :create_story
+  auto_actions :show, :new, :edit, :create, :update, :destroy, :new_story, :create_story
   
   autocomplete :new_member_name do
     project = find_instance
