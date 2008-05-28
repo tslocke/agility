@@ -11,10 +11,10 @@ class User < ActiveRecord::Base
 
   set_admin_on_first_user
   
-  has_many :owned_projects, :class_name => "Project", :foreign_key => "owner_id"
+  has_many :projects, :class_name => "Project", :foreign_key => "owner_id"
   
   has_many :project_memberships, :dependent => :destroy
-  has_many :projects, :through => :project_memberships
+  has_many :joined_projects, :through => :project_memberships, :source => :project
   
   has_many :task_assignments, :dependent => :destroy
   has_many :tasks, :through => :task_assignments
