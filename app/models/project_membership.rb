@@ -4,7 +4,7 @@ class ProjectMembership < ActiveRecord::Base
 
   fields do
     timestamps
-    contributor :boolean
+    contributor :boolean, :default => false
   end
 
   belongs_to :project

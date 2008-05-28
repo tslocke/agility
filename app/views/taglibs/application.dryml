@@ -8,7 +8,7 @@
 
 
 <def tag="card" for="Task">
-  <base-card>
+  <base-card merge>
     <creation-details: replace>
       <div class="users">
         Assigned users: <repeat:users join=", "><a/></repeat:users><else>None</else>
@@ -18,7 +18,7 @@
 </def>
 
 <def tag="card" for="StoryStatus">
-  <base-card>
+  <base-card merge>
     <creation-details: replace/>
   </base-card>
 </def>
@@ -26,9 +26,10 @@
 
 <def tag="card" for="ProjectMembership">
   <set membership="&this"/>
-  <base-card:user>
+  <base-card merge>
+    <heading:><a:user/></heading:>
     <creation-details: replace>
-      Contributor: <editor:contributor with="&membership"/>
+      Contributor: <editor:contributor/>
     </creation-details:>
-  </base-card:user>
+  </base-card>
 </def>

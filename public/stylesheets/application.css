@@ -30,3 +30,5 @@ html {background: #0f2639;}
 .show-page.project .filter form {display: inline; }
 
 body.front-page p.login-advert { text-align: center; font-size: 16pt; margin-bottom: 20px;}
+
+.card h3 { border: none; }

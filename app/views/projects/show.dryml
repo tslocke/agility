@@ -1,8 +1,16 @@
 <show-page layout="aside">
 
   <aside:>
-    <h2>Project Members</h2>
-    <collection:memberships/>
+    <section:memberships class="memberships">
+      <h2><count label="Project Member" part="member-count"/></h2>
+      <collection part="members">
+        <card:><delete-button: update="member-count"/></card:>
+      </collection>
+
+      <form:new update="members, member-count" reset-form refocus-form>
+        <div>Add a member: <name-one:user complete-target="&@project" completer="new_member_name"/></div>
+      </form:new>
+    </section:memberships>
   </aside:>
 
   <primary-collection:>

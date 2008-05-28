@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   
   belongs_to :owner, :class_name => "User", :creator => true
   
-  has_many :memberships, :class_name => "ProjectMembership"
+  has_many :memberships, :class_name => "ProjectMembership", :dependent => :destroy
   has_many :contributor_memberships, :class_name => "ProjectMembership", :scope => :contributor
   has_many :members, :through => :memberships, :source => :user, :managed => true
   has_many :contributors, :through => :contributor_memberships, :source => :user
@@ -31,10 +31,6 @@ class Project < ActiveRecord::Base
     user.administrator? || (user == owner && same_fields?(new, :owner))
   end
   
-  def members_editable_by?(user)
-    user.administrator? || user == owner
-  end
-
   def deletable_by?(user)
     user.administrator? || user == owner
   end
