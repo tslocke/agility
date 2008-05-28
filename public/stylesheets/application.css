@@ -1,7 +1,66 @@
+html, body {
+	background-image: url(/images/header.png);
+	background-position: top left;
+	background-repeat: repeat-x;
+	background-color: white;
+}
+body {width: 860px; background: none;}
+
+.page-header {height: 176px; padding: 0; margin-top: 0;}
+
+.page-header h1 {
+	margin: 0; padding: 50px 30px 0;
+	font-family: "Lucida Grande", Tahoma, Arial, sans-serif; font-size: 42px; font-weight: bold;
+	text-transform: lowercase;
+}
+
+.page-header .nav {
+	position: absolute; top: 0; right: 0;
+}
+.page-header .main-nav li {margin-right: 1px;}
+.main-nav a, .main-nav a:hover {
+	padding: 37px 6px 5px; min-width: 95px;
+	text-shadow: none;
+	border: 1px solid black; border-width: 0 0 0 1px; background-color: #D61951;
+}
+.main-nav a:hover {
+	background-color: #AD163D;
+}
+.account-nav {
+	position: absolute; top: 70px; right: 15px;
+	font-size: 11px;
+}
+.account-nav a {color: #bbb;}
+
+.page-header div.search {
+	top: auto; bottom: 0; right: 5px; z-index: 10;
+}
+
+.page-content {background: none;}
+
+body {
+	color: #555;
+	font: 14px "Trebuchet MS", Arial, sans-serif; line-height: 150%;
+}
+h1, h2, h3 {font-weight: normal; line-height: 100%; text-transform: lowercase; color: #D61951;}
+h1 {margin: 20px 0 10px; font-size: 26px;}
+h2 {margin: 15px 0 10px; font-size: 18px;}
+h3 {margin: 10px 0 5px;  font-size: 16px;}
+h4 {margin: 10px 0 5px;  font-size: 14px;}
+h5 {margin: 10px 0 5px;  font-size: 12px;}
+h6 {margin: 10px 0 5px;  font-size: 10px;}
+
+.show-page .content-header, .primary-collection h2 {border-bottom: 1px solid #ccc;}
+
+.card {border: none; background: #f2f2f2;}
+a, a:hover, .card a, .card a:hover {background: none; color: #1D7D39;}
+
+.front-page .welcome-message {border: none;}
+/*
 html {background: #0f2639;}
 .page-header {padding: 0; margin-top: 15px; margin-bottom: 0;}
 .page-header {
-	width: 100%;/* height: 96px;*/
+	width: 100%;
 	background: url(/images/header-bg.png) top left repeat-x;
 }
 .page-header h1 {padding: 30px 40px;}
@@ -32,3 +91,4 @@ html {background: #0f2639;}
 body.front-page p.login-advert { text-align: center; font-size: 16pt; margin-bottom: 20px;}
 
 .card h3 { border: none; }
+*/
