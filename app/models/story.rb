@@ -24,10 +24,6 @@ class Story < ActiveRecord::Base
     writable_by?(user)
   end
   
-  def status_editable_by?(user)
-    writable_by?(user)
-  end
-
   def updatable_by?(user, new)
     writable_by?(user) && same_fields?(new, :project)
   end
