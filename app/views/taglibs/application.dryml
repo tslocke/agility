@@ -25,7 +25,6 @@
 
 
 <def tag="card" for="ProjectMembership">
-  <set membership="&this"/>
   <base-card merge>
     <heading:><a:user/></heading:>
     <creation-details: replace>
