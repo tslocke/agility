@@ -13,7 +13,7 @@ class ProjectMembership < ActiveRecord::Base
   # --- Hobo Permissions --- #
 
   def creatable_by?(user)
-    user.administrator?
+    user.administrator? || user == project.owner
   end
 
   def updatable_by?(user, new)
@@ -21,7 +21,7 @@ class ProjectMembership < ActiveRecord::Base
   end
 
   def deletable_by?(user)
-    user.administrator?
+    user.administrator? || user == project.owner
   end
 
   def viewable_by?(user, field)
