@@ -28,7 +28,7 @@ class Task < ActiveRecord::Base
   end
 
   def updatable_by?(user, new)
-    writable_by?(user) && story == new.story
+    writable_by?(user) && same_fields?(new, :story)
   end
 
   def deletable_by?(user)
