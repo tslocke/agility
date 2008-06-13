@@ -35,14 +35,17 @@ body {width: 860px; background: none;}
 .page-header div.search {
 	top: auto; bottom: 0; right: 5px; z-index: 10;
 }
+select.dev-user-changer {top: 100px; left: auto; right: 15px; height: auto;}
+
 
 .page-content {background: none;}
+.content-header, .content-body {margin: 0 25px 15px;}
 
 body {
 	color: #555;
 	font: 14px "Trebuchet MS", Arial, sans-serif; line-height: 150%;
 }
-h1, h2, h3 {font-weight: normal; line-height: 100%; text-transform: lowercase; color: #D61951;}
+h1, h2, h3 {font-weight: normal; line-height: 100%; /*text-transform: lowercase;*/ color: #D61951;}
 h1 {margin: 20px 0 10px; font-size: 26px;}
 h2 {margin: 15px 0 10px; font-size: 18px;}
 h3 {margin: 10px 0 5px;  font-size: 16px;}
@@ -55,23 +58,11 @@ h6 {margin: 10px 0 5px;  font-size: 10px;}
 .card {border: none; background: #f2f2f2;}
 a, a:hover, .card a, .card a:hover {background: none; color: #1D7D39;}
 
-.front-page .welcome-message {border: none;}
-/*
-html {background: #0f2639;}
-.page-header {padding: 0; margin-top: 15px; margin-bottom: 0;}
-.page-header {
-	width: 100%;
-	background: url(/images/header-bg.png) top left repeat-x;
-}
-.page-header h1 {padding: 30px 40px;}
+.aside {padding: 20px; margin: 40px 25px 0 0;}
+.aside-content h2, .aside-content h3 {border-bottom: 1px solid #ccc; margin-top: 0;}
 
-.page-header .nav {margin: 0; background: #101d27;}
-.main-nav {padding-left: 20px;}
-.main-nav a {padding: 7px 8px 8px; border: none; background: none;}
-.main-nav a:hover {border:none; background: black;}
-.account-nav {top: -15px;}
-.aside-content {background: #c7dbe6;}
 
+/* specific styling for the app */
 
 .show-page.story ul.collection.tasks li        { margin: 10px 0; }
 .show-page.story .card.task                   { margin: 0; }
@@ -91,4 +82,4 @@ html {background: #0f2639;}
 body.front-page p.login-advert { text-align: center; font-size: 16pt; margin-bottom: 20px;}
 
 .card h3 { border: none; }
-*/
+
