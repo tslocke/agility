@@ -1,9 +1,0 @@
-<index-page>
-
-  <content-body:>
-    <ul><li:>
-        <name/><delete-button in-place="&false"/>
-    </li:></ul>
-  </content-body:>
-
-</index-page>

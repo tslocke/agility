@@ -1,34 +1,28 @@
-<!-- Define your application-wide tags here -->
-
 <include src="rapid" plugin="hobo"/>
+
+<include src="taglibs/auto/rapid/cards"/>
+<include src="taglibs/auto/rapid/pages"/>
+<include src="taglibs/auto/rapid/forms"/>
 
 <set-theme name="clean"/>
 
-<def tag="app-name">Agility</def>
+<def tag="app-name">Agility!</def>
 
-
-<def tag="card" for="Task">
-  <base-card merge>
-    <creation-details: replace>
+<extend tag="card" for="Task">
+  <old-card merge>
+    <append-body:>
       <div class="users">
-        Assigned users: <repeat:users join=", "><a/></repeat:users><else>None</else>
+        Assigned users: <repeat:users join=", "><a/></repeat><else>None</else>
       </div>
-    </creation-details:>
-  </base-card>
-</def>
-
-<def tag="card" for="StoryStatus">
-  <base-card merge>
-    <creation-details: replace/>
-  </base-card>
-</def>
+    </append-body:>
+  </old-card>
+</extend>
 
 
-<def tag="card" for="ProjectMembership">
-  <base-card merge>
-    <heading:><a:user/></heading:>
-    <creation-details: replace>
-      Contributor: <editor:contributor/>
-    </creation-details:>
-  </base-card>
-</def>
+<extend tag="page">
+  <old-page merge>
+    <append-scripts:>
+      <javascript name="nicedit"/>
+    </append-scripts:>
+  </old-page>
+</extend>

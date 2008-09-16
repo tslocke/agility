@@ -1,1 +1,1 @@
-../../vendor/plugins/hobo/rails_generators/hobo_rapid/templates/hobo-rapid.js
+../../vendor/plugins/hobo/hobo_spec/rails_root/vendor/plugins/hobo/rails_generators/hobo_rapid/templates/hobo-rapid.js

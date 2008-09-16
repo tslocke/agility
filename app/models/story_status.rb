@@ -1,6 +1,6 @@
 class StoryStatus < ActiveRecord::Base
 
-  hobo_model
+  hobo_model # Don't put anything above this
 
   fields do
     name :string

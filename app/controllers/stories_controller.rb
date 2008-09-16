@@ -2,6 +2,8 @@ class StoriesController < ApplicationController
 
   hobo_model_controller
 
-  auto_actions :write_only, :show, :new, :edit, :create_task
+  auto_actions :show, :edit, :update, :destroy
+  
+  auto_actions_for :project, [:new, :create]
 
 end

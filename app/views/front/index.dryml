@@ -2,34 +2,23 @@
 
   <body: class="front-page"/>
 
-  <content-header:>
-    <h1 class="front-page-title">Welcome to <app-name/></h1>
-    <section class="welcome-message">
-      <h3>Agile methods need agile tools</h3>
-      
-      <p>Agility is an agile project manager. It's a place to keep
-      track of all your user stories, and the tasks associated with
-      them. Tasks can be assigned to team members, so you always know
-      who's supposed to be doing what.</p>
-    </section>
-  </content-header>
+  <content:>
+    <header class="content-header">
+      <h1>Welcome to <app-name/></h1>
+      <section class="welcome-message">
+        <h3>Blah blah and more blah</h3>
+      </section>
+    </header>
 
-  <content-body:>
-    <if test="&logged_in?" with="&current_user">
-      <collection-preview:projects>
-        <heading:>Your Projects</heading:>
-        <empty-message:>You haven't started any projects yet.</empty-message:>
-      </collection-preview:projects>
-      <p><a with="&Project" action="new">New Project</a></p>
-     
-      <collection-preview:joined-projects>
-        <heading:>Projects you have joined</heading:>
-        <empty-message:>You haven't joined any projects yet.</empty-message:>
-      </collection-preview>
-    </if>
-    <else>
-      <p class="login-advert">Please <a href="&login_url">log in </a> or <a href="&signup_url">sign up.</a></p>
-    </else>
-  </content-body>
+    <section with="&current_user" class="content-body" if="&logged_in?">
+      <h3>Your Projects</h3>
+      <collection:projects><card without-creator-link/></collection>
+      
+      <a:projects action="new">New Project</a>
+      
+      <h3>Projects you have joined</h3>
+      <collection:joined-projects><card without-creator-link/></collection>
+    </section>
+  </content:>
   
 </page>

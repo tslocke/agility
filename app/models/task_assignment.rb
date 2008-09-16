@@ -1,14 +1,13 @@
 class TaskAssignment < ActiveRecord::Base
 
-  hobo_model
+  hobo_model # Don't put anything above this
 
   fields do
     timestamps
   end
-  
+
   belongs_to :user
   belongs_to :task
-
 
   # --- Hobo Permissions --- #
 
