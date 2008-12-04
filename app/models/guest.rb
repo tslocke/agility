@@ -17,7 +17,7 @@ class Guest < Hobo::Guest
   end
   
   def administrator?
-    true
+    false
   end
 
 end
