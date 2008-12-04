@@ -26,3 +26,9 @@
     </append-scripts:>
   </old-page>
 </extend>
+
+<extend tag="form" for="Task">
+  <old-form merge>
+    <field-list: fields="description, users"/>
+  </old-form>
+</extend>

@@ -10,7 +10,7 @@ class Task < ActiveRecord::Base
   belongs_to :story
 
   has_many :task_assignments, :dependent => :destroy
-  has_many :users, :through => :task_assignments
+  has_many :users, :through => :task_assignments, :accessible => true
   
   acts_as_list :scope => :story
 
@@ -22,10 +22,6 @@ class Task < ActiveRecord::Base
 
   def update_permitted?
     acting_user.signed_up? && !story_changed?
-  end
-
-	def users_editable_by?(user)
-    acting_user.signed_up?
   end
 
   def destroy_permitted?

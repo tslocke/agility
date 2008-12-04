@@ -1,6 +1,3 @@
 <edit-page>
-  <form:>
-    <field-list: skip="position"/>
-    <cancel-link: with="&this.story"/>
-  </form:>
+  <form:><cancel: with="&this.story"/></form:>
 </edit-page>

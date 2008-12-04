@@ -3,6 +3,6 @@
   
   <primary-content: replace><editor:body/></primary-content:>
   
-  <form:><field-list: fields="description"/></form:>
+  <form:><field-list: fields="description, users"/></form:>
   
 </show-page>
