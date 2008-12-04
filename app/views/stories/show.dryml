@@ -3,4 +3,6 @@
   
   <primary-content: replace><editor:body/></primary-content:>
   
+  <form:><field-list: fields="description"/></form:>
+  
 </show-page>

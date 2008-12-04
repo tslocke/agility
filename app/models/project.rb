@@ -16,21 +16,20 @@ class Project < ActiveRecord::Base
 
   # --- Hobo Permissions --- #
 
-  def creatable_by?(user)
-    owner == user
+  def create_permitted?
+    acting_user == owner
   end
 
-  def updatable_by?(user, new)
-    user.administrator? || (user == owner && same_fields?(new, :owner))
+  def update_permitted?
+    acting_user.administrator? || (acting_user == owner && !owner_changed?)
   end
 
-  def deletable_by?(user)
-    user.administrator? || user == owner
+  def delete_permitted?
+    acting_user.administrator? || acting_user == owner
   end
 
-	def viewable_by?(user, field=nil)
-	  return true
-    user.administrator? || user == owner || user.in?(members)
+	def view_permitted?(attribute=nil)
+    acting_user.administrator? || acting_user == owner || acting_user.in?(members)
 	end
   
 end

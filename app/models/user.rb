@@ -24,40 +24,39 @@ class User < ActiveRecord::Base
   
   # --- Signup lifecycle --- #
 
-  lifecycle do
+  lifecycle do 
+    state :active, :default => true
 
-    initial_state :active
-    
-    create :anybody, :signup, 
-           :params => [:username, :email_address, :password, :password_confirmation],
-           :become => :active,
-           :if => proc {|_, u| u.guest?}
+    create :signup, :available_to => "Guest",
+           :params => [:name, :email_address, :password, :password_confirmation],
+           :become => :active
 
-    transition :nobody, :request_password_reset, { :active => :active }, :new_key => true do
+    transition :request_password_reset, { :active => :active }, :new_key => true do
       UserMailer.deliver_forgot_password(self, lifecycle.key)
     end
 
-    transition :with_key, :reset_password, { :active => :active }, 
+    transition :reset_password, { :active => :active }, :available_to => :key_holder,
                :update => [ :password, :password_confirmation ]
-
+  
   end
   
-
   # --- Hobo Permissions --- #
 
-  def creatable_by?(creator)
-    creator.administrator? || !administrator
+  def create_permitted?
+    false
   end
 
-  def updatable_by?(updater, new)
-    updater.administrator? || (updater == self && only_changed_fields?(new, :password, :password_confirmation))
+  def update_permitted?
+    acting_user.administrator? || (acting_user == self && only_changed?(:crypted_password, :email_address))
+    # Note: crypted_password has attr_protected so although it is permitted to change, it cannot be changed
+    # directly from a form submission.
   end
 
-  def deletable_by?(deleter)
-    deleter.administrator?
+  def destroy_permitted?
+    acting_user.administrator?
   end
 
-  def viewable_by?(viewer, field)
+  def view_permitted?(field)
     true
   end
 

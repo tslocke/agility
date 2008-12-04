@@ -16,25 +16,24 @@ class Task < ActiveRecord::Base
 
   # --- Hobo Permissions --- #
 
-  def creatable_by?(user)
-    user.administrator? && position.nil?
+  def create_permitted?
+    acting_user.administrator?
   end
 
-  def updatable_by?(user, new)
-    user.signed_up? && same_fields?(new, :story)
-	  
+  def update_permitted?
+    acting_user.signed_up? && !story_changed?
   end
 
 	def users_editable_by?(user)
-    user.signed_up?
+    acting_user.signed_up?
   end
 
-  def deletable_by?(user)
-    user.administrator?
+  def destroy_permitted?
+    acting_user.administrator?
   end
 
-	def viewable_by?(user, field)
-	  story.viewable_by?(user)
+	def view_permitted?(attribute)
+	  story.viewable_by?(acting_user)
 	end
 
 end

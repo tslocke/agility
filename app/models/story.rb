@@ -16,20 +16,20 @@ class Story < ActiveRecord::Base
 
   # --- Hobo Permissions --- #
 
-  def creatable_by?(user)
-    user.administrator?
+  def create_permitted?
+    acting_user.administrator?
   end
 
-  def updatable_by?(user, new)
-    user.signed_up? && same_fields?(new, :project)
+  def update_permitted?
+    acting_user.signed_up? && !project_changed?
   end
 
-  def deletable_by?(user)
-    user.administrator?
+  def destroy_permitted?
+    acting_user.administrator?
   end
 
-	def viewable_by?(user, field=nil)
-	  project.viewable_by?(user)
+	def view_permitted?(attribute)
+	  project.viewable_by?(acting_user)
 	end
 
 end

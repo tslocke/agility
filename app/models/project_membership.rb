@@ -12,20 +12,21 @@ class ProjectMembership < ActiveRecord::Base
 
   # --- Hobo Permissions --- #
 
-	def creatable_by?(user)
-	  user.administrator? || user == project.owner
-	end
+	def create_permitted?
+	  acting_user.administrator? || acting_user == project.owner
+  end
 
-	def updatable_by?(user, new)
-	  user.administrator? || user == project.owner
-	end
+  def update_permitted?
+	  acting_user.administrator? || acting_user == project.owner
+  end
 
-	def deletable_by?(user)
-	  user.administrator? || user == project.owner
-	end
+  def delete_permitted?
+	  acting_user.administrator? || acting_user == project.owner
+  end
 
-	def viewable_by?(user, field)
-	  true
+	def view_permitted?(attribute=nil)
+    true
 	end
+  
 
 end
