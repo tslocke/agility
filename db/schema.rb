@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080908125625) do
+ActiveRecord::Schema.define(:version => 20081231161313) do
 
   create_table "project_memberships", :force => true do |t|
     t.datetime "created_at"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20080908125625) do
     t.string   "salt",                      :limit => 40
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
-    t.string   "username"
+    t.string   "name"
     t.string   "email_address"
     t.boolean  "administrator",                           :default => false
     t.datetime "created_at"
