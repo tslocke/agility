@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   
   autocomplete :new_member_name do
 	  project = find_instance
-	  hobo_completions :username, User.without_project(project).is_not(project.owner)
+	  hobo_completions :name, User.without_project(project).is_not(project.owner)
 	end
 	
 
