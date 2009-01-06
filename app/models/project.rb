@@ -17,19 +17,19 @@ class Project < ActiveRecord::Base
   # --- Hobo Permissions --- #
 
   def create_permitted?
-    acting_user == owner
+    owner_is? acting_user
   end
 
   def update_permitted?
-    acting_user.administrator? || (acting_user == owner && !owner_changed?)
+    acting_user.administrator? || (owner_is?(acting_user) && !owner_changed?)
   end
 
   def delete_permitted?
-    acting_user.administrator? || acting_user == owner
+    acting_user.administrator? || owner_is?(acting_user)
   end
-
-	def view_permitted?(attribute=nil)
-    acting_user.administrator? || acting_user == owner || acting_user.in?(members)
-	end
+  
+  def view_permitted?(attribute=nil)
+    acting_user.administrator? || owner_is?(acting_user) || acting_user.in?(members)
+  end
   
 end
