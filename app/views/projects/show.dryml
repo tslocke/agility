@@ -1,28 +1,7 @@
 <show-page>
 
   <heading:><editor:name/></heading:>
-  
-  <content:>
-    <section-group>
-      <section with-flash-messages>
-        <param-content for="content"/>
-      </section>
-      <aside>
-        <h3>Project Members</h3>
-    	  <collection:memberships part="members">
-          <card><heading:><a:user/></heading:></card>
-        </collection>
-    	  
-    	  <form:memberships.new update="members" reset-form refocus-form>
-          <div>
-            Add a member: 
-            <name-one:user complete-target="&@project" completer="new_member_name"/>
-          </div>
-        </form>
-      </aside>
-    </section-group>
-  </content:>
-  
+    
   <collection: replace>
     <table-plus with="&@stories" fields="this, tasks.count, status">
   	  <prepend-header:>
@@ -33,6 +12,19 @@
       <empty-message:>No stories match your criteria</empty-message:>
     </table-plus>
   </collection:>
+  
+  
+  <aside:>
+    <h2>Project Members</h2>
+    <collection:members part="members"/>
+
+    <form:memberships.new update="members" reset-form refocus-form>
+      <div>
+        Add a member: 
+        <name-one:user complete-target="&@project" completer="new_member_name"/>
+      </div>
+    </form>
+	</aside:>
   
 </show-page>
 
