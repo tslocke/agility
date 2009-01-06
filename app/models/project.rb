@@ -11,8 +11,8 @@ class Project < ActiveRecord::Base
   
   belongs_to :owner, :class_name => "User", :creator => true
   
-  has_many :memberships, :class_name => "ProjectMembership"
-	has_many :members, :through => :memberships, :source => :user
+  has_many :memberships, :class_name => "ProjectMembership", :dependent => :destroy
+  has_many :members, :through => :memberships, :source => :user
 
   # --- Hobo Permissions --- #
 
