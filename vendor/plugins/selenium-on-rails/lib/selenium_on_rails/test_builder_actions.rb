@@ -498,6 +498,16 @@ module SeleniumOnRails::TestBuilderActions
     command 'waitForPageToLoad', timeout
   end
 
+  #http://codelevy.com/articles/2007/11/05/selenium-and-ajax-requests#comment-7
+  def watch_ajax_requests
+    command "watchAjaxRequests" 
+  end
+  
+  def wait_for_ajax_request(seconds)
+    command "waitForAjaxRequest", seconds
+  end
+  
+
 private
   # Generates the corresponding +_and_wait+ for each action.
   def self.generate_and_wait_actions
