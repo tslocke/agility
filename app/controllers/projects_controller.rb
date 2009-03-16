@@ -5,6 +5,10 @@ class ProjectsController < ApplicationController
   auto_actions :all, :except => :index
   
   auto_actions_for :owner, [:new, :create]
+
+  show_action :belongs_to_slide_editor_test do
+    show
+  end
   
   autocomplete :new_member_name do
 	  project = find_instance
