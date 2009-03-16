@@ -20,7 +20,7 @@
           <tr part="stories-row" id="row-#{typed_id}">
             <td><name/></td>
             <td><view:tasks.count/></td>
-            <td><view:status/></td>
+            <td><belongs-to-slide-editor:status/></td>
             <td class='controls'>
               <belongs-to-slide-editor>
                 <form: update="row-#{typed_id}" />

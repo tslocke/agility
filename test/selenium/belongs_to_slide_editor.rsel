@@ -1,0 +1,46 @@
+# -*- coding: utf-8 -*-
+
+include_partial "setup_fixture_set", :set => "minimal"
+# log in
+open "/login"
+type "login", "test@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+
+# test simple belongs-to-slide-editor
+open "/projects/4-first-project/belongs_to_slide_editor_test"
+click "//div[@id='view-story:4:status']/a/span"
+verify_visible "css=input.story-status-name"
+type "story_status_name", "discussing"
+watch_ajax_requests
+click "//input[@value='Save']"
+wait_for_ajax_request 5000
+verify_not_visible "css=input.story-status-name"
+verify_text "//div[@id='view-story:4:status']/a/span", "discussing"
+
+# test again: at one time we had a bug that didn't let us do it twice.
+click "//div[@id='view-story:4:status']/a/span"
+verify_visible "css=input.story-status-name"
+type "story_status_name", "discussion"
+watch_ajax_requests
+click "//input[@value='Save']"
+wait_for_ajax_request 5000
+verify_not_visible "css=input.story-status-name"
+verify_text "//div[@id='view-story:4:status']/a/span", "discussion"
+
+# test the other, more involved editor
+click "link=Edit"
+verify_visible "css=input.story-title"
+type "story_title", "First Story!"
+select "story[status_id]", "label=implementation"
+click "css=.controls .submit-button"
+wait_for_ajax_request 5000
+verify_not_visible "css=input.story-title"
+verify_text "css=span.story-title", "First Story!"
+verify_text "//div[@id='view-story:4:status']/a/span", "implementation"
+
+#test cancel
+click "//div[@id='view-story:4:status']/a/span"
+verify_visible "css=input.story-status-name"
+click "link=Cancel"
+verify_not_visible "css=input.story-status-name"
