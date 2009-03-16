@@ -4,3 +4,6 @@
 [submodule "vendor/plugins/hobo-contrib"]
 	path = vendor/plugins/hobo-contrib
 	url = git://github.com/bryanlarsen/hobo-contrib.git
+[submodule "vendor/plugins/ar_fixtures"]
+	path = vendor/plugins/ar_fixtures
+	url = git://github.com/bryanlarsen/ar_fixtures.git
