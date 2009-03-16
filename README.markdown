@@ -31,6 +31,18 @@ The *test* branch diverges slightly to enable additional tests.  The
 [hobo-contrib](http://github.com/bryanlarsen/hobo-contrib/tree/master)
 plugin.
 
+If you wish to add more tests (Yay!), you can use the [Selenium
+IDE](http://seleniumhq.org/projects/ide/).  Once that is installed,
+add the [rselenese
+format](http://wiki.openqa.org/display/SIDE/SeleniumOnRails) via
+Options|Formats|Add.  You'll probably also want to add the
+user-extensions.js script from
+vendor/plugins/selenium-on-rails/selenium-core/scripts via
+Options|General.  You will probably have to edit the code that the
+Selenium IDE generates to make the links less fragile and to add
+[verifications](http://svn.openqa.org/fisheye/browse/~raw,r=1000/selenium-on-rails/selenium-on-rails/doc/classes/SeleniumOnRails/TestBuilderAccessors.html#M000126).
+Use the existing tests as examples.
+
 ### Communicating Problems 
 
 If you have a question you wish to post to the [mailing
