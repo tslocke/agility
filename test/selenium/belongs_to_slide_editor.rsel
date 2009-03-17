@@ -33,6 +33,7 @@ click "link=Edit"
 verify_visible "css=input.story-title"
 type "story_title", "First Story!"
 select "story[status_id]", "label=implementation"
+watch_ajax_requests
 click "css=.controls .submit-button"
 wait_for_ajax_request 5000
 verify_not_visible "css=input.story-title"
@@ -44,3 +45,12 @@ click "//div[@id='view-story:4:status']/a/span"
 verify_visible "css=input.story-status-name"
 click "link=Cancel"
 verify_not_visible "css=input.story-status-name"
+
+#test delete
+verify_text "css=span.story-title", "First Story!"
+watch_ajax_requests
+click "//input[@value='Remove']"
+assert_confirmation "Are you sure?"
+wait_for_ajax_request 5000
+wait_for_condition("selenium.browserbot.getCurrentWindow().$$('span.story-title').length==0", 5000);  # wait for the fade to complete
+verify_element_not_present "css=span.story-title"

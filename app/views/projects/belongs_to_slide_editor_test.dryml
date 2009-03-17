@@ -17,14 +17,15 @@
       </prepend-header:>
       <tbody:>
         <repeat>
-          <tr part="stories-row" id="row-#{typed_id}">
-            <td><name/></td>
-            <td><view:tasks.count/></td>
-            <td><belongs-to-slide-editor:status/></td>
+          <tr part="stories-row" id="row-#{typed_id}" class="#{scope.even_odd} #{this_type.name.underscore} #{model_id_class}">
+            <td class="name-view"><name/></td>
+            <td class="tasks_count-view"><view:tasks.count/></td>
+            <td class="status-view"><belongs-to-slide-editor:status/></td>
             <td class='controls'>
               <belongs-to-slide-editor>
                 <form: update="row-#{typed_id}" />
               </belongs-to-slide-editor>
+              <delete-button/>
             </td>
           </tr >
         </repeat>
