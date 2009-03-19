@@ -1,4 +1,5 @@
 <include src="rapid" plugin="hobo"/>
+<include src="hobo-jquery" plugin="hobo-jquery" />
 
 <include src="taglibs/auto/rapid/cards"/>
 <include src="taglibs/auto/rapid/pages"/>
@@ -23,6 +24,7 @@
   <old-page merge>
     <append-scripts:>
       <javascript name="nicedit"/>
+      <hjq-assets/>
     </append-scripts:>
   </old-page>
 </extend>
