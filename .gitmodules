@@ -4,3 +4,6 @@
 [submodule "vendor/plugins/hobo-jquery"]
 	path = vendor/plugins/hobo-jquery
 	url = git://github.com/bryanlarsen/hobo-jquery.git
+[submodule "vendor/plugins/ar_fixtures"]
+	path = vendor/plugins/ar_fixtures
+	url = git://github.com/bryanlarsen/ar_fixtures.git
