@@ -5,6 +5,8 @@ class ProjectsController < ApplicationController
   auto_actions :all, :except => :index
   
   auto_actions_for :owner, [:new, :create]
+
+  show_action :nested_has_many_test
   
   autocomplete :new_member_name do
 	  project = find_instance

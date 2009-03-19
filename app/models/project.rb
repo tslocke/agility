@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
     timestamps
   end
   
-  has_many :stories, :dependent => :destroy
+  has_many :stories, :dependent => :destroy, :accessible => true
   
   belongs_to :owner, :class_name => "User", :creator => true
   

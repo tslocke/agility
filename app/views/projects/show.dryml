@@ -3,7 +3,7 @@
   <heading:><editor:name/></heading:>
     
   <collection: replace>
-    <table-plus with="&@stories" fields="this, tasks.count, status">
+    <table-plus with="&@stories" fields="this, due, tasks.count, status">
   	  <prepend-header:>
   	    <div class="filter">
   	      Display by status: <filter-menu param-name="status" options="&StoryStatus.all"/>

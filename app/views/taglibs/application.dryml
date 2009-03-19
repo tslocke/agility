@@ -34,3 +34,7 @@
     <field-list: fields="description, users"/>
   </old-form>
 </extend>
+
+<def tag="input" for="Date">
+  <hjq-datepicker dateFormat="yy-mm-dd" dayNamesMin="&['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa']" onSelect="hjq.log" merge />
+</def>

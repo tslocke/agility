@@ -1,0 +1,36 @@
+<edit-page>
+  <custom-scripts:>
+    <hjq-assets/>
+    <script type="text/javascript">
+      var last_added;
+      var last_removed;
+      function my_add_hook() {
+        last_added = this;
+      }
+      function my_remove_hook() {
+        last_removed = this;
+        return confirm("really?");
+      }
+    </script>
+  </custom-scripts:>
+  <content:>
+    <form>
+      <error-messages/>
+      <field-list fields="name, owner"/>
+      <hjq-input-many:stories remove-hook="my_remove_hook" >
+        <item:>
+          <card>
+            <header: replace />
+            <body:>
+              <field-list fields="title, body, due" />
+              <hjq-input-many:tasks fields="description" minimum="1" add-hook="my_add_hook" />
+            </body:>
+          </card>
+        </item:>
+        <add-item:>Add Story</add-item:>
+        <remove-item:>Remove Story</remove-item:>
+      </hjq-input-many>
+      <submit value="Save" /><or-cancel/>
+    </form>
+  </content:>
+</edit-page>
