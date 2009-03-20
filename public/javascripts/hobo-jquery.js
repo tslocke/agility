@@ -1,1 +1,1 @@
-/home/blarsen/dev/agility-jquery/vendor/plugins/hobo-jquery/tasks/../public/javascripts/hobo-jquery.js
+../../vendor/plugins/hobo-jquery/public/javascripts/hobo-jquery.js
