@@ -1,0 +1,19 @@
+--- 
+story_00001: 
+  created_at: 2009-03-19 20:20:38 Z
+  title: First Story
+  body: First Story
+  updated_at: 2009-03-19 20:21:02 Z
+  project_id: 1
+  id: 1
+  status_id: 1
+  due: 
+story_00002: 
+  created_at: 2009-03-19 20:24:11 Z
+  title: Second story for first project
+  body: Second story for first project (body)
+  updated_at: 2009-03-19 20:24:11 Z
+  project_id: 1
+  id: 2
+  status_id: 
+  due: 

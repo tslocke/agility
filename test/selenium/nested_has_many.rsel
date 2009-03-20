@@ -1,0 +1,91 @@
+# -*- coding: utf-8 -*-
+
+include_partial "setup_fixture_set", :set => "basic"
+# log in
+open "/login"
+type "login", "test@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+
+open "/projects/1/nested_has_many_test"
+
+# second story has no tasks but minimal="1", so should have empty task
+verify_value "project_stories_1_tasks_0_description", ""
+verify_visible "project_stories_1_tasks_0_add"
+verify_not_visible "project_stories_1_tasks_0_remove"
+
+# first story only has a single task
+verify_visible "project_stories_0_tasks_0_add"
+verify_not_visible "project_stories_0_tasks_0_remove"
+
+# verify button customized
+verify_text "project_stories_0_remove", "Remove Story"
+
+# verify fields customized
+verify_element_not_present "project_stories_0_tasks_0_position"
+
+# verify add inner
+click "project_stories_0_tasks_0_add"
+type "project_stories_0_tasks_1_description", "Second task for first story"
+verify_not_visible "project_stories_0_tasks_0_add"
+verify_visible "project_stories_0_tasks_0_remove"
+verify_visible "project_stories_0_tasks_1_add"
+verify_visible "project_stories_0_tasks_1_remove"
+
+click "project_stories_0_tasks_1_add"
+type "project_stories_0_tasks_2_description", "Third task for first story"
+verify_not_visible "project_stories_0_tasks_1_add"
+verify_visible "project_stories_0_tasks_1_remove"
+verify_visible "project_stories_0_tasks_2_add"
+verify_visible "project_stories_0_tasks_2_remove"
+
+# verify save
+click_and_wait "//input[@value='Save']"
+verify_text "css=td.count-view span", "3"
+open "/projects/1/nested_has_many_test"
+
+# verify remove inner
+click "project_stories_0_tasks_1_remove"
+verify_element_not_present "project_stories_0_task_2_description"
+verify_value "project_stories_0_tasks_1_description", "Third task for first story"
+verify_not_visible "project_stories_0_tasks_0_add"
+verify_visible "project_stories_0_tasks_0_remove"
+verify_visible "project_stories_0_tasks_1_add"
+verify_visible "project_stories_0_tasks_1_remove"
+
+# verify remove inner
+click "project_stories_0_tasks_0_remove"
+verify_element_not_present "project_stories_0_task_1_description"
+verify_value "project_stories_0_tasks_0_description", "Third task for first story"
+verify_visible "project_stories_0_tasks_0_add"
+verify_not_visible "project_stories_0_tasks_0_remove"
+
+# verify add outer
+click "project_stories_1_add"
+verify_value "project_stories_2_tasks_0_description", ""
+verify_visible "project_stories_2_tasks_0_add"
+verify_not_visible "project_stories_2_tasks_0_remove"
+click "project_stories_2_tasks_0_add"
+verify_not_visible "project_stories_2_tasks_0_add"
+verify_visible "project_stories_2_tasks_0_remove"
+verify_visible "project_stories_2_tasks_1_add"
+verify_visible "project_stories_2_tasks_1_remove"
+type "project_stories_2_tasks_1_description", "Third story Second task"
+
+# verify remove outer
+click "project_stories_0_remove"
+verify_confirmation "really?"
+verify_value "project_stories_0_title", "Second story for first project"
+
+click "project_stories_0_remove"
+verify_confirmation "really?"
+verify_value "project_stories_0_tasks_1_description", "Third story Second task"
+
+click "project_stories_0_remove"
+verify_confirmation "really?"
+
+verify_visible "project[stories][-1]_empty"
+
+# verify save of empty collection
+click_and_wait "//input[@value='Save']"
+verify_text_present "No stories match your criteria"
