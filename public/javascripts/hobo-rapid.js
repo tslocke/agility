@@ -380,9 +380,10 @@ var Hobo = {
         }
         if (e = $('ajax-progress')) {
             if (nextTo) {
-                var pos = $(nextTo).cumulativeOffset()
-                e.style.top = pos.top - nextTo.offsetHeight + "px"
-                e.style.left = (pos.left + nextTo.offsetWidth + 5) + "px"
+                var e_nextTo = $(nextTo);
+                var pos = e_nextTo.cumulativeOffset()
+                e.style.top = pos.top - e_nextTo.offsetHeight + "px"
+                e.style.left = (pos.left + e_nextTo.offsetWidth + 5) + "px"
             }
             e.style.display = "block";
         }
@@ -569,13 +570,16 @@ new HoboBehavior("ul.input-many", {
       this.updateButtons()
       this.updateInputNames()
       
+      ul.fire("rapid:add", { element: newItem })
+      ul.fire("rapid:change", { element: newItem })
+      
       new Effect.BlindDown(newItem, {duration: 0.3})
   },
   
   removeOne: function(ev, el) {
       Event.stop(ev)
       var self = this;
-      var li = el.up('li')
+      var ul = el.up('ul'), li = el.up('li')
       if (li.parentNode.childElements().length == 1) {
           // It's the last one - don't remove it, just clear it
           this.clearInputs(li)
@@ -586,11 +590,15 @@ new HoboBehavior("ul.input-many", {
               self.updateInputNames()
           } });
       }
+      ul.fire("rapid:remove")
+      ul.fire("rapid:change")
   },
+
   
   clearInputs: function(item) {
-      $(item).select('input').each(function(input){
-          if (input.getAttribute('type').toLowerCase() == 'hidden') {
+      $(item).select('input,select,textarea').each(function(input){
+          t = input.getAttribute('type')
+          if (t && t.match(/hidden/i)) {
               input.remove()
           } else {
               input.value = ""
@@ -603,15 +611,15 @@ new HoboBehavior("ul.input-many", {
       var addButton    = "<button class='add-item'>+</button>"
 
       var ul = this.element
-      if (ul.childElements().length == 1) {
-          ul.down('li').down('div.buttons').innerHTML = removeButton + ' ' + addButton
-      } else {
-          var add = ul.selectChildren('li').selectChildren('div.buttons').down('button.add-item')
-          if (add) add.remove()
-          ul.selectChildren('li:first-child').child('div.buttons').innerHTML = removeButton
-          ul.selectChildren('li:last-child').child('div.buttons').innerHTML = removeButton + ' ' + addButton
+      var children = ul.childElements();
+      // assumption: only get here after add or remove, so only second last button needs the "+" removed
+      if(children.length > 1) {
+          // cannot use .down() because that's a depth-first search.  Did I mention that I hate Prototype?
+          children[children.length-2].childElements().last().innerHTML = removeButton;
       }
-      
+      if(children.length > 0) {
+          children[children.length-1].childElements().last().innerHTML = removeButton + ' ' + addButton;
+      }
       Event.addBehavior.reload()
   },
   
