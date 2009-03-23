@@ -6,4 +6,6 @@ class StoriesController < ApplicationController
   
   auto_actions_for :project, [:new, :create]
 
+  show_action :formlet_test
+
 end
