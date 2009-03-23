@@ -506,6 +506,11 @@ module SeleniumOnRails::TestBuilderActions
   def wait_for_ajax_request(seconds)
     command "waitForAjaxRequest", seconds
   end
+
+  def watch_jquery_ajax
+    command "watchJQueryAjax"
+  end
+  
   
 
 private

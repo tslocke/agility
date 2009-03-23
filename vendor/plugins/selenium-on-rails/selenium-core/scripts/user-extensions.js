@@ -31,4 +31,12 @@ if(Selenium.prototype) {
         }, timeout);
     }
     Selenium.AjaxRequestFinished = false;
+
+
+    Selenium.prototype.doWatchJQueryAjax = function() {
+        var window = selenium.browserbot.getCurrentWindow();
+        window.jQuery(window).bind("ajaxComplete", function() { 
+            Selenium.AjaxRequestFinished = true
+        });
+    }
 }
