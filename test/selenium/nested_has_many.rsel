@@ -25,14 +25,18 @@ verify_text "project_stories_0_remove", "Remove Story"
 verify_element_not_present "project_stories_0_tasks_0_position"
 
 # verify add inner
+watch_show
 click "project_stories_0_tasks_0_add"
+wait_show
 type "project_stories_0_tasks_1_description", "Second task for first story"
 verify_not_visible "project_stories_0_tasks_0_add"
 verify_visible "project_stories_0_tasks_0_remove"
 verify_visible "project_stories_0_tasks_1_add"
 verify_visible "project_stories_0_tasks_1_remove"
 
+watch_show
 click "project_stories_0_tasks_1_add"
+wait_show
 type "project_stories_0_tasks_2_description", "Third task for first story"
 verify_not_visible "project_stories_0_tasks_1_add"
 verify_visible "project_stories_0_tasks_1_remove"
@@ -45,7 +49,9 @@ verify_text "css=td.count-view span", "3"
 open "/projects/1/nested_has_many_test"
 
 # verify remove inner
+watch_hide
 click "project_stories_0_tasks_1_remove"
+wait_hide
 verify_element_not_present "project_stories_0_task_2_description"
 verify_value "project_stories_0_tasks_1_description", "Third task for first story"
 verify_not_visible "project_stories_0_tasks_0_add"
@@ -54,14 +60,18 @@ verify_visible "project_stories_0_tasks_1_add"
 verify_visible "project_stories_0_tasks_1_remove"
 
 # verify remove inner
+watch_hide
 click "project_stories_0_tasks_0_remove"
+wait_hide
 verify_element_not_present "project_stories_0_task_1_description"
 verify_value "project_stories_0_tasks_0_description", "Third task for first story"
 verify_visible "project_stories_0_tasks_0_add"
 verify_not_visible "project_stories_0_tasks_0_remove"
 
 # verify add outer
+watch_show
 click "project_stories_1_add"
+wait_show
 verify_value "project_stories_2_tasks_0_description", ""
 verify_visible "project_stories_2_tasks_0_add"
 verify_not_visible "project_stories_2_tasks_0_remove"
@@ -73,16 +83,22 @@ verify_visible "project_stories_2_tasks_1_remove"
 type "project_stories_2_tasks_1_description", "Third story Second task"
 
 # verify remove outer
+watch_hide
 click "project_stories_0_remove"
 verify_confirmation "really?"
+wait_hide
 verify_value "project_stories_0_title", "Second story for first project"
 
+watch_hide
 click "project_stories_0_remove"
 verify_confirmation "really?"
+wait_hide
 verify_value "project_stories_0_tasks_1_description", "Third story Second task"
 
+watch_hide
 click "project_stories_0_remove"
 verify_confirmation "really?"
+wait_hide
 
 verify_visible "project[stories][-1]_empty"
 
