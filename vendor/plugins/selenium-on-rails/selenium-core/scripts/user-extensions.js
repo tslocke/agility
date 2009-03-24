@@ -76,3 +76,17 @@ if(Selenium.prototype) {
     }
     Selenium.ShowRequestFinished = false;
 }
+
+/**
+ * Finds an input element whose label has text matching the expression supplied. Expressions must
+ * begin with "jquery=".
+ */
+PageBot.prototype.locateElementByJQuery = function(query, inDocument) {
+    var q = selenium.browserbot.getCurrentWindow().jQuery(query);
+    if(q.length) {
+        return q.get(0);
+    } 
+    
+    //We couldn't find it
+    throw new SeleniumError("Unable to jQuery '" + query + "'");
+};
