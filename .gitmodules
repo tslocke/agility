@@ -7,3 +7,6 @@
 [submodule "vendor/plugins/hobo-jquery"]
 	path = vendor/plugins/hobo-jquery
 	url = git://github.com/bryanlarsen/hobo-jquery.git
+[submodule "vendor/plugins/yaml_db"]
+	path = vendor/plugins/yaml_db
+	url = git://github.com/adamwiggins/yaml_db.git
