@@ -7,10 +7,9 @@
           <input part="status-view"/>
         </status-view:>
       </field-list>
-      <formlet:status id="formlet1" update="status-view, self" message="please wait..." spinner-next-to="status-formlet-submit" part="status-formlet" before="confirm('really?');" confirm="really?" >
-        <hidden-id-field/>
+      <formlet with="&StoryStatus.new" id="formlet1" update="status-view, self" message="please wait..." spinner-next-to="status-formlet-submit" part="status-formlet" before="confirm('really?');" confirm="really?" success="jQuery('select.story-status').val(jQuery('select.story-status option:last').val())">
         <field-list fields="name"/>
-        <formlet-submit id="status-formlet-submit"/>
+        <formlet-submit value="update status" id="status-formlet-submit"/>
       </formlet>
       <submit value="Edit Story" />
     </form>

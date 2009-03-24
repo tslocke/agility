@@ -8,11 +8,12 @@ type "password", "test"
 click_and_wait "//input[@value='Log in']"
 
 open "/stories/1-first-story/formlet_test"
-type "css=#formlet1 input.story-status-name", "discussing"
+type "css=#formlet1 input.story-status-name", "test"
 watch_jquery_ajax
 click "css=#formlet1 input.formlet-submit-button"
 verify_confirmation "really?"
 verify_confirmation "really?"
 verify_text "ajax-progress-text", "please wait..."
 wait_for_ajax_request 5000
-verify_text "story[status_id]", "discussing implementation"
+verify_text "story[status_id]", "discussion implementation test"
+verify_text "jquery=select.story-status option:selected", "test"
