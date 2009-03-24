@@ -39,4 +39,40 @@ if(Selenium.prototype) {
             Selenium.AjaxRequestFinished = true
         });
     }
+
+    Selenium.prototype.doWatchHide = function() {
+        var window = selenium.browserbot.getCurrentWindow();
+        window.hjq.bindHideCallback(function() { 
+            Selenium.HideRequestFinished = true
+        });
+    }
+
+    Selenium.prototype.doWaitHide = function(timeout) {
+        return Selenium.decorateFunctionWithTimeout(function() {
+            if (Selenium.HideRequestFinished) {
+                Selenium.HideRequestFinished = false;
+                return true;
+            }
+            return false;
+        }, timeout);
+    }
+    Selenium.HideRequestFinished = false;
+
+    Selenium.prototype.doWatchShow = function() {
+        var window = selenium.browserbot.getCurrentWindow();
+        window.hjq.bindShowCallback(function() { 
+            Selenium.ShowRequestFinished = true
+        });
+    }
+
+    Selenium.prototype.doWaitShow = function(timeout) {
+        return Selenium.decorateFunctionWithTimeout(function() {
+            if (Selenium.ShowRequestFinished) {
+                Selenium.ShowRequestFinished = false;
+                return true;
+            }
+            return false;
+        }, timeout);
+    }
+    Selenium.ShowRequestFinished = false;
 }

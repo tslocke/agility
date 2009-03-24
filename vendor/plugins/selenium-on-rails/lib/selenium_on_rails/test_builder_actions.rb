@@ -503,16 +503,30 @@ module SeleniumOnRails::TestBuilderActions
     command "watchAjaxRequests" 
   end
   
-  def wait_for_ajax_request(seconds)
-    command "waitForAjaxRequest", seconds
+  def wait_for_ajax_request(ms=5000)
+    command "waitForAjaxRequest", ms
   end
 
   def watch_jquery_ajax
     command "watchJQueryAjax"
   end
   
-  
+  def watch_show
+    command "watchShow"
+  end
 
+  def wait_show(ms=5000)
+    command "waitShow", ms
+  end
+
+  def watch_hide
+    command "watchHide"
+  end
+
+  def wait_hide(ms=5000)
+    command "waitHide", ms
+  end
+  
 private
   # Generates the corresponding +_and_wait+ for each action.
   def self.generate_and_wait_actions
