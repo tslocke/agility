@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+
+include_partial "setup_fixture_set", :set => "basic"
+# log in
+open "/login"
+type "login", "test@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+
+open "/projects/1/dialog_test"
+
+verify_text "jquery=tr:eq(1) td:eq(0)", "First Story"
+
+click "css=.hjq-dialog-open-button"
+type "story_title", "Another Story"
+type "story[body]", "body"
+watch_jquery_ajax
+click "jquery=button:contains('ok')"
+wait_for_ajax_request 5000
+
+verify_text "jquery=tr:eq(3) td:eq(0)", "Another Story"

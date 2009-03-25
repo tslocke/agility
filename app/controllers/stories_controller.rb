@@ -8,4 +8,6 @@ class StoriesController < ApplicationController
 
   show_action :formlet_test
 
+  show_action :select_one_or_new_dialog_test
+
 end

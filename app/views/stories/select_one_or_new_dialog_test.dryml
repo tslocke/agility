@@ -1,0 +1,17 @@
+<def tag="input" for="StoryStatus">
+  <select-one include-none="&false" />
+</def>
+
+<edit-page>
+  <content:>
+    <form>
+      <error-messages/>      
+      <field-list fields="title, body, due, status">
+        <status-view:>
+          <select-one-or-new-dialog/>
+        </status-view:>
+      </field-list>
+      <submit value="Edit Story" />
+    </form>
+  </content:>
+</edit-page>

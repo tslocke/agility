@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+
+include_partial "setup_fixture_set", :set => "basic"
+# log in
+open "/login"
+type "login", "test@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+
+open "/stories/1-first-story/select_one_or_new_dialog_test"
+click "css=button.hjq-dialog-open-button"
+type "story_status_name", "test"
+watch_jquery_ajax
+click "jquery=button:contains('ok')"
+wait_for_ajax_request 5000
+verify_text "story[status_id]", "discussion implementation test"
+verify_text "jquery=select.story_status option:selected", "test"

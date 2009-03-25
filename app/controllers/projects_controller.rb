@@ -7,19 +7,23 @@ class ProjectsController < ApplicationController
   auto_actions_for :owner, [:new, :create]
 
   show_action :nested_has_many_test
+
+  show_action :dialog_test do
+    show
+  end
   
   autocomplete :new_member_name do
-	  project = find_instance
-	  hobo_completions :name, User.without_project(project).is_not(project.owner)
-	end
-	
-
-	def	show
-	  @project = find_instance
-	  @stories = 
-	    @project.stories.apply_scopes(:search    => [params[:search], :title],
+    project = find_instance
+    hobo_completions :name, User.without_project(project).is_not(project.owner)
+  end
+  
+  
+  def show
+    @project = find_instance
+    @stories = 
+      @project.stories.apply_scopes(:search    => [params[:search], :title],
                                     :status_is => params[:status],
-	                                  :order_by  => parse_sort_param(:title, :status))
-	end
+                                    :order_by  => parse_sort_param(:title, :status))
+  end
 
 end
