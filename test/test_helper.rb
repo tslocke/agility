@@ -40,3 +40,25 @@ end
 Webrat.configure do |config|
   config.mode = :rails
 end
+
+module Webrat
+  module SaveAndOpenPage
+    def open_in_browser_with_linux(path)
+      if platform =~ /linux/
+        command = `gconftool-2 --get '/desktop/gnome/url-handlers/http/command'`
+        system(sprintf(command, path))
+      else
+        open_in_browser_without_linux
+      end
+    end
+    alias_method_chain :open_in_browser, :linux
+  end
+end
+
+
+module Spec
+  module Expectations
+    class ExpectationNotMetError < Exception
+    end
+  end
+end
