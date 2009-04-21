@@ -1,0 +1,11 @@
+--- 
+story_status_00001: 
+  name: discussion
+  created_at: 2009-03-19 20:20:55 Z
+  updated_at: 2009-03-19 20:20:55 Z
+  id: 1
+story_status_00002: 
+  name: implementation
+  created_at: 2009-03-19 20:20:58 Z
+  updated_at: 2009-03-19 20:20:58 Z
+  id: 2

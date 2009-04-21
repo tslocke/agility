@@ -1,0 +1,27 @@
+--- 
+user_00001: 
+  salt: ecaaed0ae458474e1125ee1079ee9ecd8c7f1e34
+  name: Test User
+  key_timestamp: 
+  created_at: 2009-03-19 20:20:33 Z
+  remember_token_expires_at: 2009-04-02 20:20:47 Z
+  crypted_password: 7aad1ca383ba52d5dbb5e6b671d1c4a704f86dc0
+  updated_at: 2009-03-19 20:20:47 Z
+  id: 1
+  administrator: true
+  remember_token: e8967744dfa542e6a9c4cf55894dac86e43fb67d
+  email_address: test@example.com
+  state: active
+user_00002: 
+  salt: 4d7f2e4320b79dec995c8fc49a4d50cbf4552151
+  name: Second User
+  key_timestamp: 
+  created_at: 2009-03-19 20:20:44 Z
+  remember_token_expires_at: 
+  crypted_password: 520b0af184d0afe6a3bed3be6eb3ef0f721256d4
+  updated_at: 2009-03-19 20:20:44 Z
+  id: 2
+  administrator: false
+  remember_token: 
+  email_address: second@example.com
+  state: active
