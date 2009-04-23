@@ -7,7 +7,7 @@ class TableControlsPermissionTest < ActionController::IntegrationTest
 
   test "story: proper controls display respecting permissions in project table" do
     login_administrator
-    click_link "First Project"
+    visit webrat_session.dom.at(".project-link")['href']+"/show_with_controls"
     assert_have_selector ".delete-story-button"
     assert_have_selector ".story-link.edit-link"
     assert_have_selector ".new-story-link"
