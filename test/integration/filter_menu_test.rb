@@ -1,31 +1,12 @@
 require 'test_helper'
+require 'integration/integration_test_helper'
 
 class FilterMenuTest < ActionController::IntegrationTest
+  include IntegrationTestHelper
   scenario "basic"
 
-  def login
-    visit "/login"
-    fill_in "login", :with => "test@example.com"
-    fill_in "password", :with => "test"
-    click_button "Log in"
-    assert_contain "You have logged in."
-  end
-
-  def wait_assert(&block)
-    wait_for do
-      begin
-        yield
-      rescue
-        true
-      else
-        false
-      end
-    end
-  end
-
-  # Replace this with your real tests.
   test "project: filter status" do
-    login
+    login_administrator
     click_link "First Project"
     assert_contain "First Story"
     assert_contain "Second story"
@@ -46,4 +27,5 @@ class FilterMenuTest < ActionController::IntegrationTest
     assert_contain "First Story"
     assert_contain "Second story"
   end
+
 end
