@@ -1,2 +1,5 @@
 .show-page.project .filter {float: left;}
 .show-page.project .filter form, .show-page.project .filter form div {display: inline;}
+
+em {font-style: italic;}
+strong {font-weight: bold;}

@@ -6,4 +6,8 @@ module IntegrationTestHelper
     click_button "Log in"
     assert_contain "You have logged in."
   end
-end  
+
+  def el_by_css(selector)
+    webrat_session.dom.at(selector)
+  end
+end

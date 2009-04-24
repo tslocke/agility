@@ -9,7 +9,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081231161313) do
+ActiveRecord::Schema.define(:version => 20090424195051) do
+
+  create_table "foos", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "i"
+    t.float    "f"
+    t.string   "s"
+    t.text     "tt"
+    t.date     "d"
+    t.datetime "dt"
+    t.text     "hh"
+    t.text     "tl"
+    t.text     "md"
+    t.string   "es",         :default => "a"
+  end
 
   create_table "project_memberships", :force => true do |t|
     t.datetime "created_at"
@@ -67,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20081231161313) do
     t.datetime "updated_at"
     t.string   "state",                                   :default => "active"
     t.datetime "key_timestamp"
+    t.boolean  "tester",                                  :default => false
   end
 
 end

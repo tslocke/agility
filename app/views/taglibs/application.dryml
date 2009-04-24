@@ -24,6 +24,12 @@
     <append-scripts:>
       <javascript name="nicedit"/>
     </append-scripts:>
+    <main-nav:>
+      <!-- we're redefining "main-nav" just to hide our test models -->
+      <nav-item href="#{base_url}/">Home</nav-item>
+      <nav-item with="&Foo" if="&current_user.tester?">Foos</nav-item>
+      <nav-item with="&StoryStatus">Story Statuses</nav-item>
+    </main-nav:>
   </old-page>
 </extend>
 
@@ -32,3 +38,4 @@
     <field-list: fields="description, users"/>
   </old-form>
 </extend>
+

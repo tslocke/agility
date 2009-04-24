@@ -12,6 +12,7 @@ user_00001:
   remember_token: e8967744dfa542e6a9c4cf55894dac86e43fb67d
   email_address: test@example.com
   state: active
+  tester: true
 user_00002: 
   salt: 4d7f2e4320b79dec995c8fc49a4d50cbf4552151
   name: Second User
@@ -25,3 +26,4 @@ user_00002:
   remember_token: 
   email_address: second@example.com
   state: active
+  tester: false

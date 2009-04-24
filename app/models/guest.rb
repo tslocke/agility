@@ -20,4 +20,8 @@ class Guest < Hobo::Guest
     false
   end
 
+  def tester?
+    false
+  end
+
 end
