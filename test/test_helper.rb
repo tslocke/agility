@@ -44,9 +44,16 @@ end
 module Webrat
   module SaveAndOpenPage
     def open_in_browser_with_linux(path)
-      if platform =~ /linux/
-        command = `gconftool-2 --get '/desktop/gnome/url-handlers/http/command'`
-        system(sprintf(command, path))
+      if ruby_platform =~ /linux/
+        if !`which htmlview`.blank?
+          # Fedora
+          `htmlview #{path}`
+        elsif !`ps ax | grep gnome-session | grep -v grep`.blank?
+          # Gnome
+          `gnome-open #{path}`
+        else
+          `kde-open #{path}`
+        end
       else
         open_in_browser_without_linux
       end
