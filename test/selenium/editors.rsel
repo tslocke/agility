@@ -1,0 +1,62 @@
+# -*- coding: utf-8 -*-
+
+include_partial "setup_fixture_set", :set => "basic"
+
+# log in
+open "/login"
+type "login", "test@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+
+open "/foos/new"
+
+click_and_wait "//input[@value='Create Foo']"
+click_and_wait "link=editors"
+
+
+module ::MyTester
+  attr_accessor :verify_list
+
+  def use_editor(selector, value, response=nil)
+    click selector
+    type "value", value
+    watch_ajax_requests
+    fire_event("value", "blur")
+    wait_for_ajax_request 5000
+    response=value if response.nil?
+    verify_text selector, response
+    @verify_list << { :selector => selector, :value => response }
+  end
+end
+
+@verify_list = []
+extend ::MyTester
+
+use_editor "css=.foo_i", "17"
+use_editor "css=.foo_f", "3.14159"
+use_editor "css=.foo_s", "hello"
+use_editor "css=.foo-tt", "plain text"
+use_editor "css=.foo-d", "April 8, 1973"
+use_editor "css=.foo-dt", "May 13, 1975 9:29", "May 13, 1975 09:29"
+
+click "css=.foo-hh"
+type "value", "<i>this</i> is <b>HTML</b>"
+watch_ajax_requests
+click "//input[@value='Save']"
+wait_for_ajax_request 5000
+verify_text "css=.foo-hh", "this is HTML"
+verify_list << { :selector => "css=.foo-hh", :value => "this is HTML" }
+
+use_editor "css=.foo-tl", "_this_ is *textile*", "this is textile"
+use_editor "css=.foo-md", "*this* is **markdown**", "this is markdown"
+
+watch_ajax_requests
+select "css=.foo_es", "label=C"
+wait_for_ajax_request 5000
+verify_list << { :selector => "css=.foo_es", :value => "c" }
+
+click_and_wait "id=exit"
+
+verify_list.each {|v|
+  verify_text v[:selector].gsub("_", "-"), v[:value]
+}              

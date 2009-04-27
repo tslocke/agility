@@ -1,3 +1,6 @@
 <show-page>
   <field-list: tag="editor" />
+  <append-content-body:>
+    <%= link_to ( "exit editors", this, :id => "exit" ) %>
+  </append-content-body:>
 </show-page>

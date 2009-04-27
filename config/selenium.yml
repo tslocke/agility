@@ -33,7 +33,7 @@ browsers:
 #port_start: 3000
 #port_end: 3005
 #base_url_path: '/'
-#max_browser_duration: 120
+max_browser_duration: 600
 #multi_window: false
   
 #result_dir: 'c:\result' # the directory where the results will be stored after a test:acceptance run

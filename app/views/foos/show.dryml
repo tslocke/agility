@@ -1,2 +1,5 @@
 <show-page>
+  <append-content-body:>
+    <%= link_to "editors", :controller => "foos", :action => "show_editors", :id => this.id %>
+  </append-content-body:>
 </show-page>
