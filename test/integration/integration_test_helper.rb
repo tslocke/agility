@@ -10,4 +10,8 @@ module IntegrationTestHelper
   def el_by_css(selector)
     webrat_session.dom.at(selector)
   end
+
+  def assert_selector_contains(selector, text)
+    assert_equal text, el_by_css(selector).text.strip.split.join(" ")
+  end
 end
