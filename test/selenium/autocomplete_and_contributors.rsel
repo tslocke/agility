@@ -1,0 +1,51 @@
+# -*- coding: utf-8 -*-
+
+include_partial "setup_fixture_set", :set => "basic"
+
+# log in
+open "/login"
+type "login", "test@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+
+click_and_wait "link=First Project"
+watch_ajax_requests
+type_keys "css=.autocompleter", "c"
+wait_for_ajax_request 5000
+click "css=.completions-popup li:first-child"
+watch_ajax_requests
+submit "css=form.new"
+wait_for_ajax_request 5000
+
+watch_ajax_requests
+type_keys "css=.autocompleter", "i"
+wait_for_ajax_request 5000
+click "css=.completions-popup li:first-child"
+watch_ajax_requests
+submit "css=form.new"
+wait_for_ajax_request 5000
+
+watch_ajax_requests
+click "css=.project_membership_contributor"
+wait_for_ajax_request
+
+click_and_wait "link=Log out"
+click_and_wait "link=Log in"
+type "login", "second@example.com"
+type "password", "second"
+click_and_wait "//input[@value='Log in']"
+verify_text_present "Logged in as Second User"
+
+click_and_wait "link=First Project"
+verify_text_present "Edit Project"
+
+click_and_wait "link=Log out"
+click_and_wait "link=Log in"
+type "login", "third@example.com"
+type "password", "test"
+click_and_wait "//input[@value='Log in']"
+verify_text_present "Logged in as Third User"
+
+click_and_wait "link=First Project"
+verify_text_not_present "Edit Project"
+

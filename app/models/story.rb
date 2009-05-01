@@ -21,7 +21,7 @@ class Story < ActiveRecord::Base
   end
 
   def update_permitted?
-    acting_user.signed_up? && !project_changed?
+    project.updatable_by?(acting_user)
   end
 
   def destroy_permitted?

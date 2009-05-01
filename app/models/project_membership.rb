@@ -3,6 +3,7 @@ class ProjectMembership < ActiveRecord::Base
   hobo_model # Don't put anything above this
 
   fields do
+    contributor :boolean, :default => false
     timestamps
   end
   

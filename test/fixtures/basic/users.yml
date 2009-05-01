@@ -1,29 +1,43 @@
 --- 
+user_00003: 
+  salt: 8fb7008ecae512ae382686f637f47e96a67b6856
+  name: Third User
+  key_timestamp: 
+  created_at: 2009-05-01 18:59:35 Z
+  tester: false
+  remember_token_expires_at: 
+  crypted_password: caa0be89c02e1c13a41f42bca270e2556e48b8d9
+  updated_at: 2009-05-01 18:59:35 Z
+  id: 3
+  administrator: false
+  remember_token: 
+  email_address: third@example.com
+  state: active
 user_00001: 
   salt: ecaaed0ae458474e1125ee1079ee9ecd8c7f1e34
   name: Test User
   key_timestamp: 
   created_at: 2009-03-19 20:20:33 Z
-  remember_token_expires_at: 2009-04-02 20:20:47 Z
+  tester: true
+  remember_token_expires_at: 
   crypted_password: 7aad1ca383ba52d5dbb5e6b671d1c4a704f86dc0
-  updated_at: 2009-03-19 20:20:47 Z
+  updated_at: 2009-05-01 18:58:32 Z
   id: 1
   administrator: true
-  remember_token: e8967744dfa542e6a9c4cf55894dac86e43fb67d
+  remember_token: 
   email_address: test@example.com
   state: active
-  tester: true
 user_00002: 
   salt: 4d7f2e4320b79dec995c8fc49a4d50cbf4552151
   name: Second User
   key_timestamp: 
   created_at: 2009-03-19 20:20:44 Z
+  tester: false
   remember_token_expires_at: 
   crypted_password: 520b0af184d0afe6a3bed3be6eb3ef0f721256d4
-  updated_at: 2009-03-19 20:20:44 Z
+  updated_at: 2009-05-01 18:58:32 Z
   id: 2
   administrator: false
   remember_token: 
   email_address: second@example.com
   state: active
-  tester: false

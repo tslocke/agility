@@ -16,7 +16,7 @@
   
   <aside:>
     <h2>Project Members</h2>
-    <collection:members part="members"/>
+    <collection:memberships part="members"/>
 
     <form:memberships.new update="members" reset-form refocus-form>
       <div>

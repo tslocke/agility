@@ -39,3 +39,13 @@
   </old-form>
 </extend>
 
+<extend tag="card" for="ProjectMembership">
+  <old-card merge>
+    <heading:><a:user/></heading>
+    <body:>
+      <span>Contributor?</span>
+      <editor:contributor/>
+    </body:>
+  </old-card>
+</extend>
+ 

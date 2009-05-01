@@ -14,6 +14,15 @@ class Project < ActiveRecord::Base
   has_many :memberships, :class_name => "ProjectMembership", :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user
 
+   has_many :contributor_memberships, :class_name => "ProjectMembership", :scope => :contributor
+   has_many :contributors, :through => :contributor_memberships, :source => :user
+ 
+   # permission helper
+   def accepts_changes_from?(user)
+     user.administrator? || user == owner || user.in?(contributors)
+   end
+   
+  
   # --- Hobo Permissions --- #
 
   def create_permitted?
@@ -21,7 +30,7 @@ class Project < ActiveRecord::Base
   end
 
   def update_permitted?
-    acting_user.administrator? || (owner_is?(acting_user) && !owner_changed?)
+    acting_user.administrator? || ((owner_is?(acting_user) || accepts_changes_from?(acting_user)) && !owner_changed?)
   end
 
   def delete_permitted?
