@@ -1,6 +1,19 @@
+<include src="bug-305-test"/>
+
 <show-page>
-  <field-list: tag="editor" />
-  <append-content-body:>
+  <content-body:>    
+    <do part="bug305part">
+      <editor-field-list />
+    </do>
+    <%= link_to_remote( "click me",
+              :update => "bug305part",
+              :loading => "Hobo.showSpinner('You clicked it!');",
+              :complete => "Hobo.hideSpinner();",
+              :method => "get",
+              :url => { :action => :refresh_bug305part } ) 
+              %>
+    <br />
     <%= link_to ( "exit editors", this, :id => "exit" ) %>
-  </append-content-body:>
+    <%= link_to ( "exit editors", this, :id => "exit" ) %>
+  </content-body:>
 </show-page>

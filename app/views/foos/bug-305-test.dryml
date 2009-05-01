@@ -1,0 +1,3 @@
+<def tag="editor-field-list">
+  <field-list tag="editor" merge param />
+</def>

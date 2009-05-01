@@ -59,4 +59,26 @@ click_and_wait "id=exit"
 
 verify_list.each {|v|
   verify_text v[:selector].gsub("_", "-"), v[:value]
-}              
+}
+
+# test for bug 305
+
+click_and_wait "link=editors"
+watch_ajax_requests
+click "link=click me"
+wait_for_ajax_request 5000
+verify_text_present "You clicked me!"
+
+
+use_editor "css=.foo_i", "17"
+use_editor "css=.foo_f", "3.14159"
+use_editor "css=.foo_s", "hello"
+use_editor "css=.foo-tt", "plain text"
+use_editor "css=.foo-d", "April 8, 1973"
+use_editor "css=.foo-dt", "May 13, 1975 9:29", "May 13, 1975 09:29"
+
+click_and_wait "id=exit"
+
+verify_list.each {|v|
+  verify_text v[:selector].gsub("_", "-"), v[:value]
+}
