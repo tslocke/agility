@@ -12,19 +12,19 @@ class TaskAssignment < ActiveRecord::Base
   # --- Hobo Permissions --- #
 
   def create_permitted?
-    acting_user.administrator?
+    task.creatable_by?(acting_user)
   end
 
   def update_permitted?
-    acting_user.administrator?
+    task.updatable_by?(acting_user)
   end
 
   def destroy_permitted?
-    acting_user.administrator?
+    task.destroyable_by?(acting_user)
   end
 
   def view_permitted?(attribute)
-    true
+    task.viewable_by?(acting_user)
   end
 
 end

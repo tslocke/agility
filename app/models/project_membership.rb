@@ -21,7 +21,7 @@ class ProjectMembership < ActiveRecord::Base
     acting_user.administrator? || project.owner_is?(acting_user)
   end                             
                                   
-  def delete_permitted?           
+  def destroy_permitted?           
     acting_user.administrator? || project.owner_is?(acting_user)
   end
 

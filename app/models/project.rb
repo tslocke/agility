@@ -30,10 +30,10 @@ class Project < ActiveRecord::Base
   end
 
   def update_permitted?
-    acting_user.administrator? || ((owner_is?(acting_user) || accepts_changes_from?(acting_user)) && !owner_changed?)
+    accepts_changes_from?(acting_user) && !owner_changed?
   end
 
-  def delete_permitted?
+  def destroy_permitted?
     acting_user.administrator? || owner_is?(acting_user)
   end
   

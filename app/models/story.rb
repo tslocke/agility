@@ -17,7 +17,7 @@ class Story < ActiveRecord::Base
   # --- Hobo Permissions --- #
 
   def create_permitted?
-    acting_user.administrator?
+    project.creatable_by?(acting_user)
   end
 
   def update_permitted?
@@ -25,11 +25,11 @@ class Story < ActiveRecord::Base
   end
 
   def destroy_permitted?
-    acting_user.administrator?
+    project.destroyable_by?(acting_user)
   end
 
-	def view_permitted?(attribute)
-	  project.viewable_by?(acting_user)
-	end
+  def view_permitted?(attribute)
+    project.viewable_by?(acting_user)
+  end
 
 end
