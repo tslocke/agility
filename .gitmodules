@@ -1,6 +1,9 @@
-[submodule "vendor/plugins/hobo"]
-	path = vendor/plugins/hobo
-	url = git://github.com/tablatom/hobo.git
 [submodule "vendor/plugins/selenium-on-rails"]
 	path = vendor/plugins/selenium-on-rails
 	url = git://github.com/bryanlarsen/selenium-on-rails.git
+[submodule "vendor/plugins/nested_scenarios"]
+	path = vendor/plugins/nested_scenarios
+	url = git://github.com/josevalim/nested_scenarios.git
+[submodule "vendor/plugins/hobo"]
+	path = vendor/plugins/hobo
+	url = git://github.com/tablatom/hobo.git
