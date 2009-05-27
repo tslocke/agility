@@ -34,6 +34,7 @@ extend ::MyTester
 
 use_editor "css=.foo_i", "17"
 use_editor "css=.foo_f", "3.14159"
+use_editor "css=.foo_dec", "12.34"
 use_editor "css=.foo_s", "hello"
 use_editor "css=.foo-tt", "plain text"
 use_editor "css=.foo-d", "April 8, 1973"
@@ -72,6 +73,7 @@ verify_text_present "You clicked me!"
 
 use_editor "css=.foo_i", "17"
 use_editor "css=.foo_f", "3.14159"
+use_editor "css=.foo_dec", "12.34"
 use_editor "css=.foo_s", "hello"
 use_editor "css=.foo-tt", "plain text"
 use_editor "css=.foo-d", "April 8, 1973"

@@ -6,6 +6,7 @@ class Foo < ActiveRecord::Base
     timestamps
     i :integer
     f :float
+    dec :decimal
     s :string
     tt :text
     d :date
