@@ -6,10 +6,11 @@ class FoosBasicTestTest < ActionController::IntegrationTest
   scenario "basic"
 
   def fill_in_foo
-    check "foo_bool1"
-    uncheck "foo_bool2"
+    check "foo[bool1]"
+    uncheck "foo[bool2]"
     fill_in "foo_i", :with => "17"
     fill_in "foo_f", :with => "3.14159"
+    fill_in "foo_dec", :with => "19.42"
     fill_in "foo_s", :with => "hello"
     fill_in "foo[tt]", :with => "plain text"
     select "2009", :from => "foo_d_year"
@@ -31,6 +32,7 @@ class FoosBasicTestTest < ActionController::IntegrationTest
     assert_equal el_by_css(".foo-bool2").text.strip, "No"
     assert el_by_css(".foo-i").text.strip == "17"
     assert el_by_css(".foo-f").text.strip == "3.14159"
+    assert el_by_css(".foo-dec").text.strip == "19.42"
     assert el_by_css(".foo-s").text.strip == "hello"
     assert el_by_css(".foo-tt").text.strip == "plain text"
     assert el_by_css(".foo-d").text.strip == "April  8, 2009"
