@@ -4,6 +4,8 @@ class Foo < ActiveRecord::Base
 
   fields do
     timestamps
+    bool1 :boolean
+    bool2 :boolean
     i :integer
     f :float
     dec :decimal

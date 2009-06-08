@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090527200746) do
+ActiveRecord::Schema.define(:version => 20090608162344) do
 
   create_table "foos", :force => true do |t|
     t.datetime "created_at"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20090527200746) do
     t.text     "md"
     t.string   "es",         :default => "a"
     t.decimal  "dec"
+    t.boolean  "bool1"
+    t.boolean  "bool2"
   end
 
   create_table "project_memberships", :force => true do |t|
@@ -82,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20090527200746) do
     t.boolean  "administrator",                           :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state",                                   :default => "active"
+    t.string   "state",                                   :default => "inactive"
     t.datetime "key_timestamp"
     t.boolean  "tester",                                  :default => false
   end

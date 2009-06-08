@@ -6,6 +6,8 @@ class FoosBasicTestTest < ActionController::IntegrationTest
   scenario "basic"
 
   def fill_in_foo
+    check "foo_bool1"
+    uncheck "foo_bool2"
     fill_in "foo_i", :with => "17"
     fill_in "foo_f", :with => "3.14159"
     fill_in "foo_s", :with => "hello"
@@ -25,6 +27,8 @@ class FoosBasicTestTest < ActionController::IntegrationTest
   end
 
   def verify_foo
+    assert_equal el_by_css(".foo-bool1").text.strip, "Yes"
+    assert_equal el_by_css(".foo-bool2").text.strip, "No"
     assert el_by_css(".foo-i").text.strip == "17"
     assert el_by_css(".foo-f").text.strip == "3.14159"
     assert el_by_css(".foo-s").text.strip == "hello"

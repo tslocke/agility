@@ -1,4 +1,5 @@
 <show-page>
+  <field-list: fields="bool1, bool2, i, f, dec, s, tt, d, dt, hh, tl, md, es" />
   <append-content-body:>
     <%= link_to "editors", :controller => "foos", :action => "show_editors", :id => this.id %>
   </append-content-body:>

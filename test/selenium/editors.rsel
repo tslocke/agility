@@ -51,6 +51,18 @@ verify_list << { :selector => "css=.foo-hh", :value => "this is HTML" }
 use_editor "css=.foo-tl", "_this_ is *textile*", "this is textile"
 use_editor "css=.foo-md", "*this* is **markdown**", "this is markdown"
 
+uncheck "css=.foo_bool1"
+watch_ajax_requests
+click "css=.foo_bool1"
+wait_for_ajax_request 5000
+verify_list << { :selector => "css=.foo_bool1", :value => "Yes" }
+
+check "css=.foo_bool2"
+watch_ajax_requests
+click "css=.foo_bool2"
+wait_for_ajax_request 5000
+verify_list << { :selector => "css=.foo_bool2", :value => "No" }
+
 watch_ajax_requests
 select "css=.foo_es", "label=C"
 wait_for_ajax_request 5000
