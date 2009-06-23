@@ -1,25 +1,12 @@
 # this is a model that contains random crap for testing
-class Foo < ActiveRecord::Base
+class Bar < ActiveRecord::Base
   hobo_model
 
   fields do
-    timestamps
-    bool1 :boolean
-    bool2 :boolean
-    i :integer
-    f :float
-    dec :decimal
-    s :string
-    tt :text
-    d :date
-    dt :datetime
-    hh :html
-    tl :textile
-    md :markdown
-    es enum_string("a", "b", "c"), :default => "a"
+    name :string
   end
 
-  has_many :bars, :accessible => true
+  belongs_to :foo
 
   # --- Hobo Permissions --- #
 

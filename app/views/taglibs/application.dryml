@@ -39,6 +39,16 @@
   </old-form>
 </extend>
 
+<extend tag="form" for="Story">
+  <old-form merge>
+    <field-list:>
+      <tasks-view:>
+        <input-many/>
+      </tasks-view:>
+    </field-list:>
+  </old-form>
+</extend>
+
 <extend tag="card" for="ProjectMembership">
   <old-card merge>
     <heading:><a:user/></heading>
@@ -48,4 +58,14 @@
     </body:>
   </old-card>
 </extend>
- 
+
+
+<extend tag="form" for="Foo">
+  <old-form merge>
+    <field-list:>
+      <bars-view:>
+        <check-many />
+      </bars-view:>
+    </field-list:>
+  </old-form>
+</extend>
