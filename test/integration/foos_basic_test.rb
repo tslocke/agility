@@ -36,7 +36,7 @@ class FoosBasicTestTest < ActionController::IntegrationTest
     assert el_by_css(".foo-s").text.strip == "hello"
     assert el_by_css(".foo-tt").text.strip == "plain text"
     assert el_by_css(".foo-d").text.strip == "April  8, 2009"
-    assert el_by_css(".foo-dt").text.strip == "May 13, 2009 13:30"
+    assert el_by_css(".foo-dt").text.strip == "May 13, 2009 09:30"
     assert el_by_css(".foo-hh b").text.strip == "HTML"
     assert el_by_css(".foo-tl strong").text.strip == "textile"
     assert el_by_css(".foo-md strong").text.strip == "markdown"
