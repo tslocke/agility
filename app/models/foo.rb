@@ -8,9 +8,9 @@ class Foo < ActiveRecord::Base
     bool2 :boolean
     i :integer
     f :float
-    dec :decimal
+    dec :decimal, :precision => 10, :scale => 4
     s :string
-    tt :text
+    tt :text, :limit => 16777215
     d :date
     dt :datetime
     hh :html
