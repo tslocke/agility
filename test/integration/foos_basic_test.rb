@@ -30,17 +30,17 @@ class FoosBasicTestTest < ActionController::IntegrationTest
   def verify_foo
     assert_equal el_by_css(".foo-bool1").text.strip, "Yes"
     assert_equal el_by_css(".foo-bool2").text.strip, "No"
-    assert el_by_css(".foo-i").text.strip == "17"
-    assert el_by_css(".foo-f").text.strip == "3.14159"
-    assert el_by_css(".foo-dec").text.strip == "19.42"
-    assert el_by_css(".foo-s").text.strip == "hello"
-    assert el_by_css(".foo-tt").text.strip == "plain text"
-    assert el_by_css(".foo-d").text.strip == "April  8, 2009"
-    assert el_by_css(".foo-dt").text.strip == "May 13, 2009 09:30"
-    assert el_by_css(".foo-hh b").text.strip == "HTML"
-    assert el_by_css(".foo-tl strong").text.strip == "textile"
-    assert el_by_css(".foo-md strong").text.strip == "markdown"
-    assert el_by_css(".foo-es").text.strip == "c"
+    assert_equal el_by_css(".foo-i").text.strip, "17"
+    assert_equal el_by_css(".foo-f").text.strip, "3.14159"
+    assert_equal el_by_css(".foo-dec").text.strip, "19.42"
+    assert_equal el_by_css(".foo-s").text.strip, "hello"
+    assert_equal el_by_css(".foo-tt").text.strip, "plain text"
+    assert_equal el_by_css(".foo-d").text.strip, "April  8, 2009"
+    assert_equal el_by_css(".foo-dt").text.strip, "May 13, 2009 09:30"
+    assert_equal el_by_css(".foo-hh b").text.strip, "HTML"
+    assert_equal el_by_css(".foo-tl strong").text.strip, "textile"
+    assert_equal el_by_css(".foo-md strong").text.strip, "markdown"
+    assert_equal el_by_css(".foo-es").text.strip, "c"
   end
 
   test "basic actions for foo" do

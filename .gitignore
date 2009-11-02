@@ -3,4 +3,5 @@ log/*.log
 db/*.sqlite3
 app/views/taglibs/auto
 vendor/plugins/selenium-on-rails/log
+doc/diagrams
 *~
