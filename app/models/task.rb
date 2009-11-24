@@ -29,6 +29,7 @@ class Task < ActiveRecord::Base
   end
 
   def view_permitted?(attribute)
+    require 'ruby-debug'; debugger if self.story_id.nil?
     story.viewable_by?(acting_user)
   end
 

@@ -29,6 +29,8 @@ class Story < ActiveRecord::Base
   end
 
   def view_permitted?(attribute)
+    require 'ruby-debug'
+    debugger if project_id.nil?
     project.viewable_by?(acting_user)
   end
 
