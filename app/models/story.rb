@@ -9,8 +9,8 @@ class Story < ActiveRecord::Base
   end
   
   belongs_to :project
-	belongs_to :status, :class_name => "StoryStatus"
-  
+  belongs_to :status, :class_name => "StoryStatus"
+
   has_many :tasks, :dependent => :destroy, :order => :position
 
 

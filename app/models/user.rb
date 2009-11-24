@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
       UserMailer.deliver_forgot_password(self, lifecycle.key)
     end
 
+    transition :request_password_reset, { :inactive => :inactive }, :new_key => true do
+      UserMailer.deliver_activation(self, lifecycle.key)
+    end
+
     transition :reset_password, { :active => :active }, :available_to => :key_holder,
                :params => [ :password, :password_confirmation ]
   
