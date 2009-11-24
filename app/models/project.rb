@@ -38,8 +38,7 @@ class Project < ActiveRecord::Base
   end
   
   def view_permitted?(attribute=nil)
-    require 'ruby-debug'
-    debugger if owner_id.nil?
+    raise "bug468" if owner_id.nil?
     acting_user.administrator? || owner_is?(acting_user) || acting_user.in?(members)
   end
   

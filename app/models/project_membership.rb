@@ -26,9 +26,8 @@ class ProjectMembership < ActiveRecord::Base
   end
 
   def view_permitted?(attribute=nil)
-    require 'ruby-debug'
-    debugger if project_id.nil?
-    debugger if user_id.nil?
+    raise "bug468" if project_id.nil?
+    raise "bug468" if user_id.nil?
     true
   end
   
