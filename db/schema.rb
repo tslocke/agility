@@ -24,14 +24,14 @@ ActiveRecord::Schema.define(:version => 20091102132105) do
     t.integer  "i"
     t.float    "f"
     t.string   "s"
-    t.text     "tt",         :limit => 2147483647
+    t.text     "tt",         :limit => 16777215
     t.date     "d"
     t.datetime "dt"
     t.text     "hh"
     t.text     "tl"
     t.text     "md"
-    t.string   "es",                                                              :default => "a"
-    t.decimal  "dec",                              :precision => 10, :scale => 4
+    t.string   "es",                             :default => "a"
+    t.decimal  "dec"
     t.boolean  "bool1"
     t.boolean  "bool2"
   end
