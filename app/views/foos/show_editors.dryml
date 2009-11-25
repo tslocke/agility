@@ -13,7 +13,7 @@
               :url => { :action => :refresh_bug305part } ) 
               %>
     <br />
-    <%= link_to ( "exit editors", this, :id => "exit" ) %>
-    <%= link_to ( "exit editors", this, :id => "exit" ) %>
+    <%= link_to( "exit editors", this, :id => "exit" ) %>
+    <%= link_to( "exit editors", this, :id => "exit" ) %>
   </content-body:>
 </show-page>
