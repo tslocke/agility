@@ -17,9 +17,28 @@ class Foo < ActiveRecord::Base
     tl :textile
     md :markdown
     es enum_string("a", "b", "c"), :default => "a"
+    v :boolean, :default => true
+  end
+
+  lifecycle do
+    state :state1, :default => true
+    state :state2
+
+    transition :trans1, { :state1 => :state2 }, :params => [:v], :available_to => :all do |r|
+      raise "bug450" if r.v==false || !r.errors.blank?
+    end     
+    transition :trans2, { :state2 => :state1 }, :params => [:v], :available_to => :all do |r|
+      raise "bug450" if r.v==false || !r.errors.blank?
+    end     
   end
 
   has_many :bars, :accessible => true
+
+  validate :v_must_be_true
+
+  def v_must_be_true
+    errors.add_to_base("v must be true") unless v==true
+  end
 
   # --- Hobo Permissions --- #
 
