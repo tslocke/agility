@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
   def do_signup
     hobo_do_signup do
-      require 'ruby-debug'; debugger
       if this.errors.blank?
         secret_path = user_activate_path :id=>this.id, :key => this.lifecycle.key
         # FIXME: remove this line after you get email working reliably

@@ -18,7 +18,7 @@ module ::MyTester
   attr_accessor :verify_list
 
   def use_editor(selector, value, response=nil)
-    click selector
+    click selector+" > *"
     type "value", value
     watch_ajax_requests
     fire_event("value", "blur")
@@ -27,18 +27,24 @@ module ::MyTester
     verify_text selector, response
     @verify_list << { :selector => selector, :value => response }
   end
+
+  def use_editor2(selector, value, response=nil)
+    click selector+" > *"
+    verify_text selector, value
+    use_editor(selector, value, response)
+  end
 end
 
 @verify_list = []
 extend ::MyTester
 
-use_editor "css=.foo_i", "17"
-use_editor "css=.foo_f", "3.14159"
-use_editor "css=.foo_dec", "12.34"
-use_editor "css=.foo_s", "hello"
-use_editor "css=.foo-tt", "plain text"
-use_editor "css=.foo-d", "April 8, 1973"
-use_editor "css=.foo-dt", "May 13, 1975 9:29", "May 13, 1975 09:29"
+use_editor "css=.i-view", "17"
+use_editor "css=.f-view", "3.14159"
+use_editor "css=.dec-view", "12.34"
+use_editor "css=.s-view", "hello"
+use_editor "css=.tt-view", "plain text"
+use_editor "css=.d-view", "April 8, 1973"
+use_editor "css=.dt-view", "May 13, 1975 9:29", "May 13, 1975 09:29"
 
 click "css=.foo-hh"
 type "value", "<i>this</i> is <b>HTML</b>"
@@ -48,8 +54,8 @@ wait_for_ajax_request 5000
 verify_text "css=.foo-hh", "this is HTML"
 verify_list << { :selector => "css=.foo-hh", :value => "this is HTML" }
 
-use_editor "css=.foo-tl", "_this_ is *textile*", "this is textile"
-use_editor "css=.foo-md", "*this* is **markdown**", "this is markdown"
+use_editor "css=.tl-view", "_this_ is *textile*", "this is textile"
+use_editor "css=.md-view", "*this* is **markdown**", "this is markdown"
 
 uncheck "css=.foo_bool1"
 watch_ajax_requests
@@ -83,13 +89,15 @@ wait_for_ajax_request 5000
 verify_text_present "You clicked me!"
 
 
-use_editor "css=.foo_i", "17"
-use_editor "css=.foo_f", "3.14159"
-use_editor "css=.foo_dec", "12.34"
-use_editor "css=.foo_s", "hello"
-use_editor "css=.foo-tt", "plain text"
-use_editor "css=.foo-d", "April 8, 1973"
-use_editor "css=.foo-dt", "May 13, 1975 9:29", "May 13, 1975 09:29"
+use_editor2 "css=.i-view", "17"
+use_editor2 "css=.f-view", "3.14159"
+use_editor "css=.dec-view", "12.34"
+use_editor "css=.s-view", "hello"
+use_editor "css=.tt-view", "plain text"
+use_editor "css=.d-view", "April 8, 1973"
+use_editor "css=.dt-view", "May 13, 1975 9:29", "May 13, 1975 09:29"
+use_editor "css=.tl-view", "_this_ is *textile*", "this is textile"
+use_editor "css=.md-view", "*this* is **markdown**", "this is markdown"
 
 click_and_wait "id=exit"
 

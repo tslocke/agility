@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091102132105) do
+ActiveRecord::Schema.define(:version => 20091124160626) do
 
   create_table "bars", :force => true do |t|
     t.string  "name"
@@ -34,7 +34,12 @@ ActiveRecord::Schema.define(:version => 20091102132105) do
     t.decimal  "dec"
     t.boolean  "bool1"
     t.boolean  "bool2"
+    t.boolean  "v",                                                                  :default => true
+    t.string   "state",                                                              :default => "state1"
+    t.datetime "key_timestamp"
   end
+
+  add_index "foos", ["state"], :name => "index_foos_on_state"
 
   create_table "project_memberships", :force => true do |t|
     t.datetime "created_at"
@@ -108,5 +113,7 @@ ActiveRecord::Schema.define(:version => 20091102132105) do
     t.datetime "key_timestamp"
     t.boolean  "tester",                                  :default => false
   end
+
+  add_index "users", ["state"], :name => "index_users_on_state"
 
 end
