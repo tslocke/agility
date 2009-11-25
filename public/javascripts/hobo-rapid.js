@@ -193,6 +193,7 @@ var Hobo = {
                     onLeaveHover: null,
                     callback: function(form, val) {
                         old = val
+                        el.setAttribute("hobo-edit-text", val)
                         return (Hobo.fieldSetParam(el, val) + "&" + updateParams)
                     },
                     onFailure: function(_, resp) {
@@ -200,12 +201,16 @@ var Hobo = {
                     },
                     onEnterEditMode: function() {
                         var blank_message = el.getAttribute("hobo-blank-message")
+                        var editable_text = el.getAttribute("hobo-edit-text")
+                        if (editable_text) {
+                            el.innerHTML = editable_text
+                        }
                         if (el.innerHTML.gsub("&nbsp;", " ") == blank_message) {
                             el.innerHTML = "" 
                         } else {
                             Hobo.ipeOldValues[el.id] = el.innerHTML
                         }
-                    }
+                    },
                    }
         Object.extend(opts, options)
         return new Ajax.InPlaceEditor(el, Hobo.putUrl(el), opts)
@@ -655,7 +660,9 @@ SelectManyInput = Behavior.create({
             this.element.down('.items').appendChild(newItem);
             newItem.down('span').innerHTML = selected.innerHTML
             this.itemAdded(newItem, selected)
-            selected.disabled = true
+            var optgroup = new Element("optgroup", {alt:selected.value, label:selected.text})
+            optgroup.addClassName("disabled-option")
+            selected.replace(optgroup)
             select.value = ""
             Event.addBehavior.reload()
             this.element.fire("rapid:add", { element: newItem })
@@ -678,8 +685,10 @@ SelectManyInput = Behavior.create({
                                  element.fire("rapid:change", { element: el })
                                  } } ) 
         var label = el.down('span').innerHTML
-        var option = $A(element.getElementsByTagName('option')).find(function(o) { return o.innerHTML == label })
-        option.disabled = false
+        var optgroup = element.down("optgroup[label="+label+"]")
+        var option = new Element("option", {value:optgroup.readAttribute("alt")})
+        option.innerHTML = optgroup.readAttribute("label")
+        optgroup.replace(option)
     },
 
     itemAdded: function(item, option) {
@@ -781,6 +790,10 @@ Event.addBehavior({
                 rows: 2, handleLineBreaks: false, okButton: true, cancelLink: true, okText: "Save", submitOnBlur: false
             }
             var ipe = Hobo._makeInPlaceEditor(this, options) 
+            ipe.getText = function() {
+                // Be careful!  we're not calling unescapeHTML() here!
+                return this.element.innerHTML
+            }
         }
     },
 
@@ -848,3 +861,4 @@ Element.addMethods({
         return new ElementSet(Selector.matchElements(element.childElements(), selector))
     }
 })
+
