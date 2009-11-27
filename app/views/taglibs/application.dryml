@@ -63,9 +63,8 @@
 <extend tag="form" for="Foo">
   <old-form merge>
     <field-list:>
-      <bars-view:>
-        <check-many />
-      </bars-view:>
+      <bars-view:><input-many/></bars-view:>
+      <bazs-view:><input-many/></bazs-view:>
     </field-list:>
   </old-form>
 </extend>

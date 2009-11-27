@@ -1,0 +1,2 @@
+module FoobazsHelper
+end

@@ -55,7 +55,7 @@ module Webrat
           `kde-open #{path}`
         end
       else
-        open_in_browser_without_linux
+        open_in_browser_without_linux path
       end
     end
     alias_method_chain :open_in_browser, :linux

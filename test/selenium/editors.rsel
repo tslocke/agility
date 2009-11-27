@@ -74,6 +74,8 @@ select "css=.foo_es", "label=C"
 wait_for_ajax_request 5000
 verify_list << { :selector => "css=.foo_es", :value => "c" }
 
+pause 500
+
 click_and_wait "id=exit"
 
 verify_list.each {|v|
@@ -91,13 +93,13 @@ verify_text_present "You clicked me!"
 
 use_editor2 "css=.i-view", "17"
 use_editor2 "css=.f-view", "3.14159"
-use_editor "css=.dec-view", "12.34"
-use_editor "css=.s-view", "hello"
-use_editor "css=.tt-view", "plain text"
-use_editor "css=.d-view", "April 8, 1973"
-use_editor "css=.dt-view", "May 13, 1975 9:29", "May 13, 1975 09:29"
-use_editor "css=.tl-view", "_this_ is *textile*", "this is textile"
-use_editor "css=.md-view", "*this* is **markdown**", "this is markdown"
+use_editor2 "css=.dec-view", "12.34"
+use_editor2 "css=.s-view", "hello"
+use_editor2 "css=.tt-view", "plain text"
+use_editor2 "css=.d-view", "1973-04-08", "April 8, 1973"
+use_editor2 "css=.dt-view", "1975-05-13 09:29:00 UTC", "May 13, 1975 09:29"
+use_editor2 "css=.tl-view", "_this_ is *textile*", "this is textile"
+use_editor2 "css=.md-view", "*this* is **markdown**", "this is markdown"
 
 click_and_wait "id=exit"
 
