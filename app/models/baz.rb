@@ -8,8 +8,14 @@ class Baz < ActiveRecord::Base
   end
 
   has_many :foobazs
-  has_many :foo, :through => :foobazs
+  has_many :foos, :through => :foobazs
   has_many :bats, :accessible => true
+
+  validate :must_be_j
+
+  def must_be_j
+    errors.add_to_base("name must start with j") unless name =~ /^j/
+  end
 
   # --- Permissions --- #
 

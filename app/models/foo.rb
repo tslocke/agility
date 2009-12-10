@@ -32,9 +32,9 @@ class Foo < ActiveRecord::Base
     end     
   end
 
-  has_many :bars, :accessible => true, :dependent => :destroy
-  has_many :foobazs
-  has_many :bazs, :accessible => true, :through => :foobazs
+  has_many :bars,  :dependent => :destroy, :accessible => true
+  has_many :foobazs, :dependent => :destroy
+  has_many :bazs,  :dependent => :destroy, :through => :foobazs, :accessible => true
 
   validate :v_must_be_true
 
