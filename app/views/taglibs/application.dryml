@@ -65,6 +65,15 @@
     <field-list:>
       <bars-view:><input-many/></bars-view:>
       <bazs-view:><input-many/></bazs-view:>
+      <foobazs-view:>
+        <input-many>
+          <field-list fields="baz">
+            <baz-view:>
+              <input:name/>
+            </baz-view:>
+          </field-list>
+        </input-many>
+      </foobazs-view:>
     </field-list:>
   </old-form>
 </extend>

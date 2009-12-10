@@ -7,7 +7,7 @@ class Foobaz < ActiveRecord::Base
   end
 
   belongs_to :foo
-  belongs_to :baz
+  belongs_to :baz, :accessible => true
 
 
   # --- Permissions --- #
