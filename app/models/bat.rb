@@ -1,4 +1,4 @@
-class Baz < ActiveRecord::Base
+class Bat < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
@@ -7,22 +7,21 @@ class Baz < ActiveRecord::Base
     timestamps
   end
 
-  has_many :foobazs
-  has_many :foo, :through => :foobazs
-  has_many :bats, :accessible => true
+  belongs_to :baz
+
 
   # --- Permissions --- #
 
   def create_permitted?
-    acting_user.administrator?
+    acting_user.tester?
   end
 
   def update_permitted?
-    acting_user.administrator?
+    acting_user.tester?
   end
 
   def destroy_permitted?
-    acting_user.administrator?
+    acting_user.tester?
   end
 
   def view_permitted?(field)
