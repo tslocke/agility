@@ -22,4 +22,3 @@ config.action_controller.allow_forgery_protection    = false
 config.action_mailer.delivery_method = :test
 
 config.gem "webrat"
-config.gem "josevalim-nested_scenarios", :lib => "nested_scenarios"
