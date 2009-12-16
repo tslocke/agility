@@ -8,3 +8,5 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+load File.join(RAILS_ROOT,'vendor/plugins/hobo/hobo/tasks/hobo_tasks.rake')
+
