@@ -4,3 +4,6 @@
 [submodule "vendor/plugins/hobo"]
 	path = vendor/plugins/hobo
 	url = git://github.com/tablatom/hobo.git
+[submodule "vendor/nested_scenarios.git"]
+	path = vendor/nested_scenarios.git
+	url = git://github.com/bryanlarsen/nested_scenarios.git
