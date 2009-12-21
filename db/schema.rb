@@ -49,18 +49,18 @@ ActiveRecord::Schema.define(:version => 20091210000810) do
     t.integer  "i"
     t.float    "f"
     t.string   "s"
-    t.text     "tt",            :limit => 16777215
+    t.text     "tt"
     t.date     "d"
     t.datetime "dt"
     t.text     "hh"
     t.text     "tl"
     t.text     "md"
-    t.string   "es",                                :default => "a"
-    t.decimal  "dec"
+    t.string   "es",                                           :default => "a"
+    t.decimal  "dec",           :precision => 10, :scale => 4
     t.boolean  "bool1"
     t.boolean  "bool2"
-    t.boolean  "v",                                 :default => true
-    t.string   "state",                             :default => "state1"
+    t.boolean  "v",                                            :default => true
+    t.string   "state",                                        :default => "state1"
     t.datetime "key_timestamp"
   end
 

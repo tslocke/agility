@@ -1,1 +1,2 @@
+delete_cookie '_agility_session', '/'
 setup :fixtures => Dir["#{RAILS_ROOT}/test/fixtures/#{set}/*.yml"].map {|f| "#{set}/#{File.basename(f, '.yml')}"}
