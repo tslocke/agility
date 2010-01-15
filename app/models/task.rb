@@ -29,7 +29,7 @@ class Task < ActiveRecord::Base
   end
 
   def view_permitted?(attribute)
-    raise "bug468" if self.story_id.nil?
+    raise 'bug468' if self.story.nil? || self.story_id != self.story.idxsx
     story.viewable_by?(acting_user)
   end
 
