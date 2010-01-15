@@ -24,5 +24,7 @@ class ProjectsController < ApplicationController
   show_action :show_with_controls do
     show
   end
+
+  show_action :nested_has_many_test
   
 end

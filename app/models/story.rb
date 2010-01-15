@@ -11,7 +11,7 @@ class Story < ActiveRecord::Base
   belongs_to :project
   belongs_to :status, :class_name => "StoryStatus"
 
-  has_many :tasks, :dependent => :destroy, :order => :position
+  has_many :tasks, :dependent => :destroy, :order => :position, :accessible => true
 
 
   # --- Hobo Permissions --- #
