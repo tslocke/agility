@@ -29,7 +29,7 @@ class Story < ActiveRecord::Base
   end
 
   def view_permitted?(attribute)
-    raise "bug468" if project_id.nil?
+    raise 'bug468' if project.nil? || project_id != project.id
     project.viewable_by?(acting_user)
   end
 
