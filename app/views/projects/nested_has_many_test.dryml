@@ -20,19 +20,19 @@
     <form>
       <error-messages/>
       <field-list fields="name, owner"/>
-      <input-many:stories>
+      <sortable-input-many:stories>
         <default:>
           <card>
             <header: replace />
             <body:>
               <field-list fields="title, body" />
-              <input-many:tasks fields="description" minimum="1"/>
+              <sortable-input-many:tasks fields="description" minimum="1"/>
             </body:>
           </card>
         </default:>
         <add-item:>Add Story</add-item:>
         <remove-item:>Remove Story</remove-item:>        
-      </input-many>
+      </sortable-input-many>
       <submit value="Save" /><or-cancel/>
     </form>
   </content:>
