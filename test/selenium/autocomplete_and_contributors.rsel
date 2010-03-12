@@ -10,6 +10,7 @@ click_and_wait "//input[@value='Log in']"
 
 click_and_wait "link=First Project"
 watch_ajax_requests
+fire_event "css=.autocompleter", "focus"
 type_keys "css=.autocompleter", "c"
 wait_for_ajax_request 5000
 click "css=.completions-popup li:first-child"
