@@ -44,7 +44,7 @@ end
 module Webrat
   module SaveAndOpenPage
     def open_in_browser_with_linux(path)
-      if ruby_platform =~ /linux/
+      if RUBY_PLATFORM =~ /linux/
         if !`which htmlview`.blank?
           # Fedora
           `htmlview #{path}`
