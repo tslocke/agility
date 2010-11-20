@@ -23,7 +23,7 @@ module ::MyTester
     watch_ajax_requests
     fire_event("value", "blur")
     wait_for_ajax_request 5000
-    pause 100
+    pause 150
     response=value if response.nil?
     verify_text selector, response
     @verify_list << { :selector => selector, :value => response }
