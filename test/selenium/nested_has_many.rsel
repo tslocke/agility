@@ -107,7 +107,7 @@ click "project_stories_0_remove"
 verify_confirmation "really?"
 pause 1000 # wait_hide
 
-verify_visible "project_stories_-1_empty"
+verify_visible "project[stories][-1]_empty"
 
 # verify save of empty collection
 click_and_wait "//input[@value='Save']"
