@@ -35,7 +35,7 @@ class FoosBasicTestTest < ActionController::IntegrationTest
     assert_equal el_by_css(".foo-dec").text.strip, "19.42"
     assert_equal el_by_css(".foo-s").text.strip, "hello"
     assert_equal el_by_css(".foo-tt").text.strip, "plain text"
-    assert_equal el_by_css(".foo-d").text.strip, "April 08, 2009"
+    assert_equal el_by_css(".foo-d").text.strip, "April  8, 2009"
     assert_equal el_by_css(".foo-dt").text.strip, "May 13, 2009 09:30"
     assert_equal el_by_css(".foo-hh b").text.strip, "HTML"
     assert_equal el_by_css(".foo-tl strong").text.strip, "textile"
