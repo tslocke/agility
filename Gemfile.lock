@@ -1,0 +1,70 @@
+GIT
+  remote: git://github.com/tablatom/hobo.git
+  revision: 99ded7809572f8b4efb9332324623bffc2e11610
+  branch: 1-0-stable
+  specs:
+    hobo (1.0.2)
+      hobofields (= 1.0.2)
+      hobosupport (= 1.0.2)
+      rails (>= 2.2.2, < 3.0.0)
+      will_paginate (>= 2.3.11, ~> 2)
+    hobofields (1.0.2)
+      hobosupport (= 1.0.2)
+      rails (>= 2.2.2, < 3.0.0)
+    hobosupport (1.0.2)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    RedCloth (4.2.2)
+    actionmailer (2.2.2)
+      actionpack (= 2.2.2)
+    actionpack (2.2.2)
+      activesupport (= 2.2.2)
+    activerecord (2.2.2)
+      activesupport (= 2.2.2)
+    activeresource (2.2.2)
+      activesupport (= 2.2.2)
+    activesupport (2.2.2)
+    bluecloth (2.0.7)
+    cgi_multipart_eof_fix (2.5.0)
+    daemons (1.1.0)
+    fastthread (1.0.7)
+    gem_plugin (0.2.3)
+    mongrel (1.1.5)
+      cgi_multipart_eof_fix (>= 2.4)
+      daemons (>= 1.0.3)
+      fastthread (>= 1.0.1)
+      gem_plugin (>= 0.2.3)
+    nokogiri (1.4.4)
+    rack (1.0.1)
+    rack-test (0.5.7)
+      rack (>= 1.0)
+    rails (2.2.2)
+      actionmailer (= 2.2.2)
+      actionpack (= 2.2.2)
+      activerecord (= 2.2.2)
+      activeresource (= 2.2.2)
+      activesupport (= 2.2.2)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    sqlite3-ruby (1.2.5)
+    webrat (0.7.0)
+      nokogiri (>= 1.2.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5.3)
+    will_paginate (2.3.12)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  RedCloth (= 4.2.2)
+  bluecloth (= 2.0.7)
+  hobo!
+  mongrel (= 1.1.5)
+  rack (= 1.0.1)
+  rails (= 2.2.2)
+  sqlite3-ruby (= 1.2.5)
+  webrat (= 0.7.0)
+  will_paginate (= 2.3.12)
