@@ -37,6 +37,10 @@ are more difficult to run.  To make this easier, we've included an
 tweak config/selenium.yml if the test has trouble contacting your
 browser.
 
+Note that you'll probably want to tweak the hobo definition in
+`Gemfile` and then run `bundle update hobo` to test your branch of
+Hobo rather than the stock version, which has already been tested.
+
 ### Communicating Problems 
 
 If you have a question you wish to post to the [mailing
