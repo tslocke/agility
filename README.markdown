@@ -17,31 +17,25 @@ of additional purposes.
 
 ### Testing Hobo
 
-Agility is also used to test the [Hobo
-framework](http://www.hobocentral.net).  If you wish to run the tests,
-edit _config/selenium.yml_ to set the path to your web browser of
-choice.  Then you should be able to run the tests:
+The *master* branch of agility is set up to test Hobo 1.0.X with Ruby
+1.8.7, Rails 2.2.2, sqlite3 and Firefox on Linux.   The `patches`
+directory may be used to modify any of these assumptions.
 
-    script/server -e test -p 3001 &
-    rake test:acceptance
+Currently the only meaningful tests here are Webrat (aka integration) and
+Selenium (aka acceptance) tests.   The unit & functional tests run,
+but don't contain any useful tests -- the unit tests for Hobo are in
+Hobo itself.
 
-The *master* branch of agility is designed to accompany the tutorial.
-The *test* branch diverges slightly to enable additional tests.  The
-*contrib-test* branch tests the
-[hobo-contrib](http://github.com/bryanlarsen/hobo-contrib/tree/master)
-plugin.
+Integration tests should run with a simple `rake test:integration`
+after you've done the standard `bundle install` and `rake db:migrate`.
+You may also need to do `rake hobo:generate_taglibs` if you've never
+run agility in the development environment.
 
-If you wish to add more tests (Yay!), you can use the [Selenium
-IDE](http://seleniumhq.org/projects/ide/).  Once that is installed,
-add the [rselenese
-format](http://wiki.openqa.org/display/SIDE/SeleniumOnRails) via
-Options|Formats|Add.  You'll probably also want to add the
-user-extensions.js script from
-vendor/plugins/selenium-on-rails/selenium-core/scripts via
-Options|General.  You will probably have to edit the code that the
-Selenium IDE generates to make the links less fragile and to add
-[verifications](http://svn.openqa.org/fisheye/browse/~raw,r=1000/selenium-on-rails/selenium-on-rails/doc/classes/SeleniumOnRails/TestBuilderAccessors.html#M000126).
-Use the existing tests as examples.
+Acceptance tests require a running server and a working browser, so
+are more difficult to run.  To make this easier, we've included an
+"acceptance_test.sh" that you can run and/or examine.  You may have to
+tweak config/selenium.yml if the test has trouble contacting your
+browser.
 
 ### Communicating Problems 
 
