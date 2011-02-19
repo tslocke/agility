@@ -1,0 +1,519 @@
+diff --git a/Gemfile b/Gemfile
+index f088ac6..8445cd5 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -33,4 +33,4 @@ gem "hobo", :git => "git://github.com/tablatom/hobo.git",
+ 
+ 
+ # this section of the Gemfile is patched by the Hobo patches
+-:branch => "1-0-stable"
++:branch => "master"
+diff --git a/app/views/projects/nested_has_many_test.dryml b/app/views/projects/nested_has_many_test.dryml
+index 92d7715..fd2db55 100644
+--- a/app/views/projects/nested_has_many_test.dryml
++++ b/app/views/projects/nested_has_many_test.dryml
+@@ -20,19 +20,19 @@
+     <form>
+       <error-messages/>
+       <field-list fields="name, owner"/>
+-      <input-many:stories>
++      <sortable-input-many:stories>
+         <default:>
+           <card>
+             <header: replace />
+             <body:>
+               <field-list fields="title, body" />
+-              <input-many:tasks fields="description" minimum="1"/>
++              <sortable-input-many:tasks fields="description" minimum="1"/>
+             </body:>
+           </card>
+         </default:>
+         <add-item:>Add Story</add-item:>
+         <remove-item:>Remove Story</remove-item:>        
+-      </input-many>
++      </sortable-input-many>
+       <submit value="Save" /><or-cancel/>
+     </form>
+   </content:>
+diff --git a/config/initializers/hobo.rb b/config/initializers/hobo.rb
+index 286b2a6..53263d6 100644
+--- a/config/initializers/hobo.rb
++++ b/config/initializers/hobo.rb
+@@ -1 +1,2 @@
+ Hobo::ModelRouter.reload_routes_on_every_request = true
++# Dryml.precompile_taglibs if File.basename($0) != "rake" && Rails.env.production? 
+diff --git a/public/hobothemes/clean/stylesheets/clean.css b/public/hobothemes/clean/stylesheets/clean.css
+index 54c2db3..71d0913 100644
+--- a/public/hobothemes/clean/stylesheets/clean.css
++++ b/public/hobothemes/clean/stylesheets/clean.css
+@@ -57,7 +57,7 @@ pre, code {
+     font-family:  "Courier New", Courier, monospace;
+ }
+ 
+-input.text, input.string, input.email-address, input.password, input.search, input.integer, input.float, textarea {
++input.text, input.string, input.email-address, input.password, input.search, input.integer, input.float, input.autocompleter, input.decimal, textarea {
+ 	border-top:1px solid #7c7c7c;
+ 	border-left:1px solid #c3c3c3;
+ 	border-right:1px solid #c3c3c3;
+diff --git a/public/hobothemes/clean/stylesheets/rapid-ui.css b/public/hobothemes/clean/stylesheets/rapid-ui.css
+index d4801bf..7fceec8 100644
+--- a/public/hobothemes/clean/stylesheets/rapid-ui.css
++++ b/public/hobothemes/clean/stylesheets/rapid-ui.css
+@@ -97,4 +97,6 @@ select.dev-user-changer:hover { opacity: 1; }
+ optgroup.disabled-option {
+     color: #ccc;
+     height: 1em;
+-}
+\ No newline at end of file
++}
++
++input.nil-value { color:grey; }
+\ No newline at end of file
+diff --git a/public/javascripts/hobo-rapid.js b/public/javascripts/hobo-rapid.js
+index 1b6b2c4..e8cbc12 100644
+--- a/public/javascripts/hobo-rapid.js
++++ b/public/javascripts/hobo-rapid.js
+@@ -408,8 +408,8 @@ var Hobo = {
+ 
+ 
+     updateElement: function(id, content) {
+-        // TODO: Do we need this method?
+         Element.update(id, content)
++        Element.fire($(id), "rapid:partupdated")
+     },
+ 
+     getStyle: function(el, styleProp) {
+@@ -560,7 +560,7 @@ HoboBehavior = Class.create({
+ })
+ 
+ 
+-new HoboBehavior("ul.input-many", {
++HoboInputMany = {
+   
+   events: {
+       "> li > div.buttons": {
+@@ -569,9 +569,9 @@ new HoboBehavior("ul.input-many", {
+       }
+   },
+ 
+-  initialize: function(ul) {
++  initialize: function(ev) {
+       /* the second clause should be sufficient, but it isn't in IE7.  See bug 603  */
+-      $$(".input-many-template input:hidden, .input-many-template select:hidden, .input-many-template textarea:hidden, .input-many-template button:hidden").each(function(input) {
++      Element.select(ev.target, ".input-many-template input:hidden, .input-many-template select:hidden, .input-many-template textarea:hidden, .input-many-template button:hidden").each(function(input) {
+           if(!input.disabled) {
+               input.disabled = true;
+               input.addClassName("input_many_template_input");
+@@ -579,10 +579,33 @@ new HoboBehavior("ul.input-many", {
+       });
+ 
+       // disable all elements inside our template, and mark them so we can find them later.
+-      $$(".input-many-template input:enabled, .input-many-template select:enabled, .input-many-template textarea:enabled, .input-many-template button:enabled").each(function(input) {
++      Element.select(ev.target, ".input-many-template input:enabled, .input-many-template select:enabled, .input-many-template textarea:enabled, .input-many-template button:enabled").each(function(input) {
+           input.disabled = true;
+           input.addClassName("input_many_template_input");
+       });
++
++      Element.select(ev.target, ".sortable-input-many").each(function(el) {
++          HoboInputMany.createSortable.call(el);
++      });
++
++      /* need to reinitialize after every change */
++      Event.addBehavior({".sortable-input-many:rapid:change": function(ev) {
++          HoboInputMany.createSortable.call(this);
++      }});
++
++      document.observe("rapid:partupdated", HoboInputMany.initialize);
++  },
++
++  createSortable: function() {
++      Sortable.create(this.id, {
++          constraint: 'vertical', 
++          handle: 'ordering-handle', 
++          overlap: 'vertical', 
++          scroll: 'window',
++          onUpdate: function(list) {
++              HoboInputMany.fixIndices.call(list);                
++          }
++      });
+   },
+ 
+     // given this==the input-many, returns a lambda that updates the name & id for an element
+@@ -619,23 +642,56 @@ new HoboBehavior("ul.input-many", {
+ 
+   // given this==an input-many item, get the submit index
+   getIndex: function() {
+-      return Number(this.id.match(/\[([-0-9]+)\]$/)[1]);
++      return Number(this.id.match(/_([-0-9]+)$/)[1]);
+   },
+ 
+-  /* For some reason, select() and down() and all those useful functions aren't working for us.  Roll our own replacement. */
+-  recurse_elements_with_class: function(el, klass, f) {
+-      var that=this;
+-      if(klass==null || el.hasClassName(klass)) {
+-          f(el);
++    /* For some reason, select() and down() and all those useful functions aren't working for us.  Roll our own replacement.   
++
++      this: element to recurse on.   
++      klass: class to filter on
++      f: function to invoke
++    */
++  recurse_elements_with_class: function(klass,f ) {
++      if(klass==null || this.hasClassName(klass)) {
++          f(this);
+       }
+-      el.childElements().each(function(el2) {that.recurse_elements_with_class.call(that, el2, klass, f);});
++      this.childElements().each(function(el2) {HoboInputMany.recurse_elements_with_class.call(el2, klass, f);});
+   },
+ 
++/* fixes the indices on an input-many so they're in order. */
++  fixIndices: function() {
++    var lis = this.immediateDescendants();
++    var minimum = parseInt(Hobo.getClassData(this, 'minimum'));
++    /* first two lis are hidden/disabled on an input-many */
++    for(var i=0; i<lis.length-2; i++) {
++        var il=i+2;
++        if(i!=HoboInputMany.getIndex.call(lis[il])) {
++            var updater = HoboInputMany.getNameUpdater.call(this, i);
++            HoboInputMany.recurse_elements_with_class.call(lis[il], null, function(el) {
++                updater.call(el);
++            });
++            var position=lis[il].childWithClass("sortable-position");
++            if(position) position.value=i+1;
++            if(i==minimum-1 && il==lis.length-1) {
++                lis[il].childWithClass("buttons").childWithClass("remove-item").addClassName("hidden");
++            } else {
++                lis[il].childWithClass("buttons").childWithClass("remove-item").removeClassName("hidden");
++            }
++            if(il==lis.length-1) {
++                lis[il].childWithClass("buttons").childWithClass("add-item").removeClassName("hidden");
++            } else {
++                lis[il].childWithClass("buttons").childWithClass("add-item").addClassName("hidden");
++            }
++        }
++    }
++  },
++
++
+   addOne: function(ev, el) {
+       Event.stop(ev);
+       var ul = el.up('ul.input-many'), li = el.up('li.input-many-li');
+ 
+-      if(li.id.search(/\[-1\]/ && ul.immediateDescendants().length>2)>=0) {
++      if(li.id.search(/_-1$/)>=0 && ul.immediateDescendants().length>2) {
+           /* if(console) console.log("IE7 messed up again (bug 605)"); */
+           return;
+       }
+@@ -658,7 +714,7 @@ new HoboBehavior("ul.input-many", {
+       reenable_inputs(clone);
+ 
+       // update id & name
+-      this.recurse_elements_with_class.call(this, clone, null, function(el) {
++      HoboInputMany.recurse_elements_with_class.call(clone, null, function(el) {
+           name_updater.call(el);
+       });
+ 
+@@ -691,7 +747,7 @@ new HoboBehavior("ul.input-many", {
+       var ul = el.up('ul.input-many'), li = el.up('li.input-many-li')
+       var minimum = parseInt(Hobo.getClassData(ul, 'minimum'));
+ 
+-      if(li.id.search(/\[-1\]/)>=0) {
++      if(li.id.search(/_-1$/)>=0) {
+           /* if(console) console.log("IE7 messed up again (bug 605)"); */
+           return;
+       }
+@@ -703,7 +759,7 @@ new HoboBehavior("ul.input-many", {
+       var n=li.next();
+       for(; n; i+=1, n=n.next()) {          
+           var name_updater = this.getNameUpdater.call(ul, i);
+-          this.recurse_elements_with_class.call(this, n, null, function(el) {name_updater.call(el);});
++          HoboInputMany.recurse_elements_with_class.call(n, null, function(el) {name_updater.call(el);});
+       } 
+ 
+       // adjust +/- buttons on the button element as appropriate
+@@ -714,7 +770,7 @@ new HoboBehavior("ul.input-many", {
+ 
+       if(last.hasClassName("empty")) {
+           last.removeClassName("hidden");
+-          this.recurse_elements_with_class.call(this, last, "empty-input", function(el) {el.disabled=false;});
++          HoboInputMany.recurse_elements_with_class.call(last, "empty-input", function(el) {el.disabled=false;});
+       } else {
+           // if we've reached the minimum, we don't want to add the '-' button
+           if(ul.childElements().length-3 <= minimum||0) {
+@@ -734,7 +790,9 @@ new HoboBehavior("ul.input-many", {
+ 
+ 
+ 
+-})
++}
++  
++new HoboBehavior("ul.input-many", HoboInputMany);
+ 
+ 
+ SelectManyInput = Behavior.create({
+@@ -811,9 +869,10 @@ NameManyInput = Object.extend(SelectManyInput, {
+     }
+ })
+ 
+-                              
++             
+ AutocompleteBehavior = Behavior.create({
+     initialize : function() {
++        this.minChars  = parseInt(Hobo.getClassData(this.element, "min-chars")); 
+         var match     = this.element.className.match(/complete-on::([\S]+)/)
+         var target    = match[1].split('::')
+         var typedId   = target[0]
+@@ -822,11 +881,27 @@ AutocompleteBehavior = Behavior.create({
+         var spec = Hobo.parseModelSpec(typedId)
+         var url = urlBase + "/" + Hobo.pluralise(spec.name) +  "/complete_" + completer
+         var parameters = spec.id ? "id=" + spec.id : ""
+-        new Ajax.Autocompleter(this.element, 
+-                               this.element.next('.completions-popup'), 
+-                               url, 
+-                               {paramName:'query', method:'get', parameters: parameters});
++        this.autocompleter = new Ajax.Autocompleter(this.element, 
++            this.element.next('.completions-popup'), 
++            url, 
++            {paramName:'query', method:'get', parameters: parameters, minChars: this.minChars,
++            afterUpdateElement: this.afterUpdateElement});
++    },
++
++    onfocus: function() {
++        if(this.element.hasClassName("nil-value")) {
++            this.element.value = '';
++            this.element.removeClassName("nil-value");
++        }
++        if(this.minChars==0) { 
++            this.autocompleter.activate();
++        }
++    },
++
++    afterUpdateElement: function(input, li) {
++        input.fire("rapid:autocomplete-assigned");
+     }
++        
+ })
+ 
+ 
+diff --git a/public/javascripts/ie7-recalc.js b/public/javascripts/ie7-recalc.js
+index f07c5a6..1f4b89c 100644
+--- a/public/javascripts/ie7-recalc.js
++++ b/public/javascripts/ie7-recalc.js
+@@ -1,2 +1,166 @@
+-/* IE7/IE8.js - copyright 2004-2008, Dean Edwards */
+-(function(){if(!IE7.loaded)return;CLASSES=/\sie7_class\d+/g;IE7.CSS.extend({elements:{},handlers:[],reset:function(){this.removeEventHandlers();var a=this.elements;for(var b in a)a[b].runtimeStyle.cssText="";this.elements={};var a=IE7.Rule.elements;for(var b in a){with(a[b])className=className.replace(CLASSES,"")}IE7.Rule.elements={}},reload:function(){this.rules=[];this.getInlineStyles();this.screen.load();if(this.print)this.print.load();this.refresh();this.trash()},addRecalc:function(b,c,d,e){this.base(b,c,function(a){d(a);IE7.CSS.elements[a.uniqueID]=a},e)},recalc:function(){this.reset();this.base()},addEventHandler:function(a,b,c){a.attachEvent(b,c);this.handlers.push(arguments)},removeEventHandlers:function(){var a;while(a=this.handlers.pop()){a[0].detachEvent(a[1],a[2])}},getInlineStyles:function(){var a=document.getElementsByTagName("style"),b;for(var c=a.length-1;(b=a[c]);c--){if(!b.disabled&&!b.ie7){var d=b.cssText||b.innerHTML;this.styles.push(d);b.cssText=d}}},trash:function(){var a=document.styleSheets,b,c;for(c=0;c<a.length;c++){b=a[c];if(!b.ie7&&!b.cssText){b.cssText=b.cssText}}this.base()},getText:function(a){return a.cssText||this.base(a)}});IE7.CSS.addEventHandler(window,"onunload",function(){IE7.CSS.removeEventHandlers()});IE7.Rule.elements={};IE7.Rule.prototype.extend({add:function(a){this.base(a);IE7.Rule.elements[a.uniqueID]=a}});if(IE7.PseudoElement){IE7.PseudoElement.hash={};IE7.PseudoElement.prototype.extend({create:function(a){var b=this.selector+":"+a.uniqueID;if(!IE7.PseudoElement.hash[b]){IE7.PseudoElement.hash[b]=true;this.base(a)}}})}IE7.HTML.extend({elements:{},addRecalc:function(b,c){this.base(b,function(a){if(!this.elements[a.uniqueID]){c(a);this.elements[a.uniqueID]=a}})}});document.recalc=function(a){if(IE7.CSS.screen){if(a)IE7.CSS.reload();IE7.recalc()}}})();
+\ No newline at end of file
++
++// =========================================================================
++// ie7-recalc.js
++// =========================================================================
++
++(function() {
++  /* ---------------------------------------------------------------------
++  
++    This allows refreshing of IE7 style rules. If you modify the DOM
++    you can update IE7 by calling document.recalc().
++  
++    This should be the LAST module included.
++  
++  --------------------------------------------------------------------- */
++  
++  if (!IE7.loaded) return;
++  
++  // remove all IE7 classes from an element
++  CLASSES = /\sie7_class\d+/g;
++  
++  IE7.CSS.extend({
++    // store for elements that have style properties calculated
++    elements: {},
++    handlers: [],
++    
++    // clear IE7 classes and styles
++    reset: function() {
++      this.removeEventHandlers();
++      // reset IE7 classes here
++      var elements = this.elements;
++      for (var i in elements) elements[i].runtimeStyle.cssText = "";
++      this.elements = {};
++      // reset runtimeStyle here
++      var elements = IE7.Rule.elements;
++      for (var i in elements) {
++        with (elements[i]) className = className.replace(CLASSES, "");
++      }
++      IE7.Rule.elements = {};
++    },
++    
++    reload: function() {
++      this.rules = [];
++      this.getInlineStyles();
++      this.screen.load();
++      if (this.print) this.print.load();
++      this.refresh();
++      this.trash();
++    },
++    
++    addRecalc: function(propertyName, test, handler, replacement) {
++      // call the ancestor method to add a wrapped recalc method
++      this.base(propertyName, test, function(element) {
++        // execute the original recalc method
++        handler(element);
++        // store a reference to this element so we can clear its style later
++        IE7.CSS.elements[element.uniqueID] = element;
++      }, replacement);
++    },
++    
++    recalc: function() {
++      // clear IE7 styles and classes
++      this.reset();
++      // execute the ancestor method to perform recalculations
++      this.base();
++    },
++    
++    addEventHandler: function(element, type, handler) {
++      element.attachEvent(type, handler);
++      // store the handler so it can be detached later
++      this.handlers.push(arguments);
++    },
++    
++    removeEventHandlers: function() {
++      var handler;
++       while (handler = this.handlers.pop()) {
++         handler[0].detachEvent(handler[1], handler[2]);
++       }
++    },
++    
++    getInlineStyles: function() {
++      // load inline styles
++      var styleSheets = document.getElementsByTagName("style"), styleSheet;
++      for (var i = styleSheets.length - 1; (styleSheet = styleSheets[i]); i--) {
++        if (!styleSheet.disabled && !styleSheet.ie7) {
++          var cssText = styleSheet.cssText || styleSheet.innerHTML;
++          this.styles.push(cssText);
++          styleSheet.cssText = cssText;
++        }
++      }
++    },
++    
++    trash: function() {
++      // trash the old style sheets
++      var styleSheets = document.styleSheets, styleSheet, i;
++      for (i = 0; i < styleSheets.length; i++) {
++        styleSheet = styleSheets[i];
++        if (!styleSheet.ie7 && !styleSheet.cssText && styleSheet.cssText != '') {
++          styleSheet.cssText = styleSheet.cssText;
++        }
++      }
++      this.base();
++    },
++    
++    getText: function(styleSheet) {
++      return styleSheet.cssText || this.base(styleSheet);
++    }
++  });
++  
++  // remove event handlers (they eat memory)
++  IE7.CSS.addEventHandler(window, "onunload", function() {
++     IE7.CSS.removeEventHandlers();
++  });
++  
++  // store all elements with an IE7 class assigned
++  IE7.Rule.elements = {};
++
++  IE7.Rule.prototype.extend({
++    add: function(element) {
++      // execute the ancestor "add" method
++      this.base(element);
++      // store a reference to this element so we can clear its classes later
++      IE7.Rule.elements[element.uniqueID] = element;
++    }
++  });
++
++  // store created pseudo elements
++  if (IE7.PseudoElement) {
++    IE7.PseudoElement.hash = {};
++  
++    IE7.PseudoElement.prototype.extend({
++      create: function(target) {
++        var key = this.selector + ":" + target.uniqueID;
++        if (!IE7.PseudoElement.hash[key]) {
++          IE7.PseudoElement.hash[key] = true;
++          this.base(target);
++        }
++      }
++    });
++  }
++  
++  IE7.HTML.extend({
++    elements: {},
++    
++    addRecalc: function(selector, handler) {
++      // call the ancestor method to add a wrapped recalc method
++      this.base(selector, function(element) {
++        if (!this.elements[element.uniqueID]) {
++          // execute the original recalc method
++          handler(element);
++          // store a reference to this element so that
++          //  it is not "fixed" again
++          this.elements[element.uniqueID] = element;
++        }
++      });
++    }
++  });
++  
++  // allow refreshing of IE7 fixes
++  document.recalc = function(reload) {
++    if (IE7.CSS.screen) {
++      if (reload) IE7.CSS.reload();
++      IE7.recalc();
++    }
++  };
++
++})();
+diff --git a/test/integration/foos_basic_test.rb b/test/integration/foos_basic_test.rb
+index 812d3ed..4fd3d6a 100644
+--- a/test/integration/foos_basic_test.rb
++++ b/test/integration/foos_basic_test.rb
+@@ -36,7 +36,7 @@ class FoosBasicTestTest < ActionController::IntegrationTest
+     assert_equal el_by_css(".foo-dec").text.strip, "19.42"
+     assert_equal el_by_css(".foo-s").text.strip, "hello"
+     assert_equal el_by_css(".foo-tt").text.strip, "plain text"
+-    assert_equal el_by_css(".foo-d").text.strip, "April  8, 2009"
++    assert_equal el_by_css(".foo-d").text.strip, "April 08, 2009"
+     assert_equal el_by_css(".foo-dt").text.strip, "May 13, 2009 09:30"
+     assert_equal el_by_css(".foo-hh b").text.strip, "HTML"
+     assert_equal el_by_css(".foo-tl strong").text.strip, "textile"
+diff --git a/test/selenium/editors.rsel b/test/selenium/editors.rsel
+index ec36316..eed5f87 100644
+--- a/test/selenium/editors.rsel
++++ b/test/selenium/editors.rsel
+@@ -44,7 +44,7 @@ use_editor "css=.f-view", "3.14159"
+ use_editor "css=.dec-view", "12.34"
+ use_editor "css=.s-view", "hello"
+ use_editor "css=.tt-view", "plain text"
+-use_editor "css=.d-view", "April 8, 1973"
++use_editor "css=.d-view", "April 08, 1973"
+ use_editor "css=.dt-view", "May 13, 1975 9:29", "May 13, 1975 09:29"
+ 
+ click "css=.foo-hh"
+@@ -97,7 +97,7 @@ use_editor2 "css=.f-view", "3.14159"
+ use_editor2 "css=.dec-view", "12.34"
+ use_editor2 "css=.s-view", "hello"
+ use_editor2 "css=.tt-view", "plain text"
+-use_editor2 "css=.d-view", "1973-04-08", "April 8, 1973"
++use_editor2 "css=.d-view", "1973-04-08", "April 08, 1973"
+ use_editor2 "css=.dt-view", "1975-05-13 09:29:00 UTC", "May 13, 1975 09:29"
+ use_editor2 "css=.tl-view", "_this_ is *textile*", "this is textile"
+ use_editor2 "css=.md-view", "*this* is **markdown**", "this is markdown"
+diff --git a/test/selenium/nested_has_many.rsel b/test/selenium/nested_has_many.rsel
+index 4da6e42..4ec7f1a 100644
+--- a/test/selenium/nested_has_many.rsel
++++ b/test/selenium/nested_has_many.rsel
+@@ -107,7 +107,7 @@ click "project_stories_0_remove"
+ verify_confirmation "really?"
+ pause 1000 # wait_hide
+ 
+-verify_visible "project[stories][-1]_empty"
++verify_visible "project_stories_-1_empty"
+ 
+ # verify save of empty collection
+ click_and_wait "//input[@value='Save']"

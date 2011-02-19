@@ -1,0 +1,57 @@
+diff --git a/Gemfile b/Gemfile
+index da1c374..9ee4b7b 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -1,20 +1,15 @@
+ source "http://rubygems.org"
+ 
+ # this section of the Gemfile is patched by the rails patches
+-
+-# for rails 2.2.2 we'll lock down some older versions just to widen our test
+-gem "rails", "= 2.2.2"
+-gem "mongrel", "= 1.1.5"      # to prevent this bug:  http://www.ruby-forum.com/topic/206225
+-gem "bluecloth", "= 2.0.1"
+-gem "RedCloth", "= 4.1.1", :require => "redcloth"
++gem "rails", "= 2.3.11"
++gem "bluecloth"
++gem "RedCloth", :require => "redcloth"
+ group :test do
+-  gem "webrat", "= 0.7.0"
+-  # rails 2.2.2 doesn't require rack, but webrat does
+-  gem "rack", "= 1.0.1"
++  gem "webrat"
+ end
+-gem "will_paginate", "= 2.3.12"
+-sql_version="= 1.2.5"
+-mysql_version="= 2.7.3"
++gem "will_paginate", "~> 2.0"
++sql_version="~> 1.0"
++mysql_version="~> 2.0"
+ 
+ 
+ 
+diff --git a/acceptance_test.sh b/acceptance_test.sh
+index c77e5fb..2455003 100755
+--- a/acceptance_test.sh
++++ b/acceptance_test.sh
+@@ -1,6 +1,6 @@
+ #!/usr/bin/env bash
+ set -e -x
+-mongrel_rails start -e test -p 3002 &
++./script/server -e test -p 3002 &
+ pid=$!
+ sleep 10
+ rake test:acceptance
+diff --git a/config/environment.rb b/config/environment.rb
+index 8eca6a3..b94e3af 100644
+--- a/config/environment.rb
++++ b/config/environment.rb
+@@ -5,7 +5,7 @@
+ # ENV['RAILS_ENV'] ||= 'production'
+ 
+ # Specifies gem version of Rails to use when vendor/rails is not present
+-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
++RAILS_GEM_VERSION = '2.3.11' unless defined? RAILS_GEM_VERSION
+ 
+ # Bootstrap the Rails environment, frameworks, and default configuration
+ require File.join(File.dirname(__FILE__), 'boot')
