@@ -5,8 +5,8 @@ source "http://rubygems.org"
 # for rails 2.2.2 we'll lock down some older versions just to widen our test
 gem "rails", "= 2.2.2"
 gem "mongrel", "= 1.1.5"      # to prevent this bug:  http://www.ruby-forum.com/topic/206225
-gem "bluecloth", "= 2.0.7"
-gem "RedCloth", "= 4.2.2", :require => "redcloth"
+gem "bluecloth", "= 2.0.1"
+gem "RedCloth", "= 4.1.1", :require => "redcloth"
 group :test do
   gem "webrat", "= 0.7.0"
   # rails 2.2.2 doesn't require rack, but webrat does
