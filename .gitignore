@@ -6,3 +6,4 @@ vendor/plugins/selenium-on-rails/log
 doc/diagrams
 *~
 webrat-*.html
+**.orig
