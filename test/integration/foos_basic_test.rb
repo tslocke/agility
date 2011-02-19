@@ -3,7 +3,8 @@ require 'integration/integration_test_helper'
 
 class FoosBasicTestTest < ActionController::IntegrationTest
   include IntegrationTestHelper
-  scenario "basic"
+  self.fixture_path += "basic/"
+  fixtures :all
 
   def fill_in_foo
     check "foo[bool1]"

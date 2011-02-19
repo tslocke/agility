@@ -3,7 +3,8 @@ require 'integration/integration_test_helper'
 
 class Bug414Test < ActionController::IntegrationTest
   include IntegrationTestHelper
-  scenario "basic"
+  self.fixture_path += "basic/"
+  fixtures :all
 
   test "can have a table-plus and field-list with arrays of hashes" do
     login_administrator

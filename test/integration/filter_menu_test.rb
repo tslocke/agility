@@ -3,7 +3,8 @@ require 'integration/integration_test_helper'
 
 class FilterMenuTest < ActionController::IntegrationTest
   include IntegrationTestHelper
-  scenario "basic"
+  self.fixture_path += "basic/"
+  fixtures :all
 
   test "project: filter status" do
     login_administrator

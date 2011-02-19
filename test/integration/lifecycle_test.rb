@@ -1,9 +1,10 @@
 require 'test_helper'
 require 'integration/integration_test_helper'
 
-class Bug414Test < ActionController::IntegrationTest
+class LifecycleTest < ActionController::IntegrationTest
   include IntegrationTestHelper
-  scenario "basic"
+  self.fixture_path += "basic/"
+  fixtures :all
 
   test "lifecycles" do
     login_administrator

@@ -3,7 +3,8 @@ require 'integration/integration_test_helper'
 
 class TableControlsPermissionTest < ActionController::IntegrationTest
   include IntegrationTestHelper
-  scenario "basic"
+  self.fixture_path += "basic/"
+  fixtures :all
 
   test "story: proper controls display respecting permissions in project table" do
     login_administrator
