@@ -17,6 +17,7 @@ for combo in ${combos[*]} ; do
     source rvm gemset use $GEMSET
     patch_up
     bundle install --local
+    rake hobo:generate_taglibs
     rake test:integration
     source acceptance_test.sh
     patch_down

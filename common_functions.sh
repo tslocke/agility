@@ -23,10 +23,10 @@ function patch_up {
 }
 
 function patch_down {
-    patch -p1 -R < patches/$RUBY.patch
-    patch -p1 -R < patches/$RAILS.patch
-    patch -p1 -R < patches/$DB.patch
     patch -p1 -R < patches/$HOBO.patch
+    patch -p1 -R < patches/$DB.patch
+    patch -p1 -R < patches/$RAILS.patch
+    patch -p1 -R < patches/$RUBY.patch
     rm current-combo.txt
 }
 

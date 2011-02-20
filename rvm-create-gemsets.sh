@@ -16,6 +16,7 @@ for combo in ${combos[*]} ; do
     source rvm use $RUBY
     source rvm gemset create $GEMSET
     source rvm gemset use $GEMSET
+    gem install bundler --no-rdoc --no-ri   # just in case
     patch_up
     bundle update
     patch_down

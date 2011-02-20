@@ -78,7 +78,12 @@ libreadline-dev.
 
 ### Create the gemsets
 
-Now create all the gemset and let bundler populate them
+Because we're using bundler, it's not strictly necessary to create a
+separate gemset for each environment.   However, we have found that
+bundler isolation is not perfect for older versions of Rails.  Also
+these isolated gemsets are useful for the Hobo unit tests.
+
+Create all the gemsets and let bundler populate them
 
     rvm use 1.8.7   # just making sure rvm is initialized
     ./rvm-create-gemsets.sh
