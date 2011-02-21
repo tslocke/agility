@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e -x
+set -e
 mongrel_rails start -e test -p 3002 &
 pid=$!
 sleep 10
