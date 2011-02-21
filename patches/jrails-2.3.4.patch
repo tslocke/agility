@@ -47,7 +47,7 @@ index c77e5fb..aa2bda5 100755
 -sleep 10
 -rake test:acceptance
 +sleep 35
-+jruby -J-Djruby.fork.enabled=true -S rake test:acceptance
++JAVA_OPTS='-J-Djruby.fork.enabled=true' rake test:acceptance
  kill $pid || true
  sleep 1
  kill -9 $pid || true
