@@ -33,8 +33,12 @@ function patch_down {
 # run this function before running your first patch_up
 function reset_patches {
     if test -e current-combo.txt ; then
-        parse_combo `cat current-combo.txt`
-        patch_down
+        if git_cleanliness ; then
+            rm current-combo.txt
+        else
+            parse_combo `cat current-combo.txt`
+            patch_down
+        fi
     fi
 }
 
