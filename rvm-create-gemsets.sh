@@ -9,7 +9,7 @@ combos=( `cat test-combos.txt` )
 reset_patches
 
 # because of set -e, this will bail if git not clean
-git_cleanliness
+git_cleanliness || (echo "git not clean, bailing" ; exit 1)
 
 for combo in ${combos[*]} ; do
     parse_combo $combo
