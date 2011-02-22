@@ -1,0 +1,20 @@
+--- agility/Gemfile.sqlite3	2011-02-21 23:09:04.793568088 -0500
++++ agility/Gemfile	2011-02-21 23:09:15.553468969 -0500
+@@ -13,7 +13,7 @@
+ 
+ 
+ # this section of the Gemfile is patched by the database patches
+-gem "activerecord-jdbcsqlite3-adapter", sql_version
++gem "activerecord-jdbcmysql-adapter", sql_version
+ 
+ 
+ 
+diff --git a/config/database.yml b/config/database.yml
+index 18cf4f9..9019b12 100644
+--- a/config/database.yml
++++ b/config/database.yml
+@@ -1,3 +1,3 @@
+ <%# do not modify this file directly, you'll break the patches.   Modify config/database.yml.mysql instead. %>
+ 
+-<%= File.open("#{RAILS_ROOT}/config/database.yml.sqlite3").read %>
++<%= File.open("#{RAILS_ROOT}/config/database.yml.mysql").read %>
