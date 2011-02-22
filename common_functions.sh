@@ -44,5 +44,5 @@ function reset_patches {
 
 
 function git_cleanliness {
-    ! git status --porcelain | grep -v "test-combos.txt" | grep "^ M"
+    ! git status --porcelain | grep -v "test-combos.txt" | grep -v "Gemfile" | grep "^ M"
 }
