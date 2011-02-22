@@ -17,7 +17,7 @@ Hobo itself.
 Integration tests should run with a simple `rake test:integration`
 after you've done the standard `bundle install` and `rake db:migrate`.
 You may also need to do `rake hobo:generate_taglibs` if you've never
-run agility in the development environment.  
+run agility in the development environment.
 
 To run the tests under mysql, copy `config/database.yml.mysql.sample`
 to `config/database.yml.mysql`.  DO NOT TOUCH `config/database.yml`
@@ -41,13 +41,13 @@ We regularly test Hobo against many versions of Ruby and Rails.  All
 the combinations that are tested are listed in `test-combos.txt`.  If
 you want to do the same, here's some instructions.
 
-The first thing you should do is to trim down `test-combos.txt`.  Once
-you have things figured out you can add more combinations into
-`test-combos.txt`.
+The first thing you should do is to trim down `test-combos.txt` so
+that it doesn't take several hours to run.  Once you have things
+figured out you can add more combinations into `test-combos.txt`.
 
 The other first thing you should do is to make sure that `rake
-test:integration` and `./acceptance_test.sh` work following the
-instructions above.
+test:integration` and `./acceptance_test.sh` work for every database
+you're testing against.
 
 ### Install RVM & the Rubies
 
@@ -73,10 +73,10 @@ So it might go something like this after rvm is installed:
 
     # this is only 2 of the rubies listed in test-combos.txt, but it's enough to start
     rvm install 1.8.7-p249
-    rvm install 1.9.2-p0 -C --with-readline-dir=$rvm_path/usr
+    rvm install 1.9.2-p136 -C --with-readline-dir=$rvm_path/usr
 
 You also have to have the mysql server installed for some of the
-tests, and you need to be able to build the mysql gem.  For example,
+combos, and you need to be able to build the mysql gem.  For example,
 on Ubuntu, you should probably have these packages installed:
 build-essential ruby-full libsqlite3-dev mysql-server mysql-client
 libmysql-ruby libmysqlclient-dev  libxslt-dev libxml2-dev 
