@@ -16,6 +16,8 @@ test:
   password:
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  timeout: 5000
+  adapter: mysql
+  encoding: utf8
+  database: agility_production
+  username: root
+  password:
