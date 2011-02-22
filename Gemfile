@@ -34,3 +34,19 @@ gem "hobo", :git => "git://github.com/tablatom/hobo.git",
 
 # this section of the Gemfile is patched by the Hobo patches
 :branch => "1-0-stable"
+
+
+
+
+# this section is not required for agility, but lists the requirements
+# to run Hobo rake tasks and the Hobo unit tests.   We want these in
+# our rvm gemsets so we can run our unit tests against all
+# combinations of rails & ruby
+group :hobo_unit_test do
+  gem "yard"
+  gem "jeweler"
+  gem "rubydoctest", :git => "git://github.com/tablatom/rubydoctest.git", :branch => "master"
+  gem "mysql"
+  gem "activerecord-comments", :git => "git://github.com/bryanlarsen/activerecord-comments.git", :branch => "master"
+  gem "rubigen", "= 1.3.4"  # compatible with old activesupport
+end

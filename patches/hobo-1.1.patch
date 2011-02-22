@@ -1,13 +1,16 @@
 diff --git a/Gemfile b/Gemfile
-index f088ac6..8445cd5 100644
+index dae3718..45e6c2d 100644
 --- a/Gemfile
 +++ b/Gemfile
-@@ -33,4 +33,4 @@ gem "hobo", :git => "git://github.com/tablatom/hobo.git",
+@@ -33,7 +33,7 @@ gem "hobo", :git => "git://github.com/tablatom/hobo.git",
  
  
  # this section of the Gemfile is patched by the Hobo patches
 -:branch => "1-0-stable"
 +:branch => "master"
+ 
+ 
+ 
 diff --git a/app/views/projects/nested_has_many_test.dryml b/app/views/projects/nested_has_many_test.dryml
 index 92d7715..fd2db55 100644
 --- a/app/views/projects/nested_has_many_test.dryml
