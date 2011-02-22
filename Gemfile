@@ -14,7 +14,7 @@ group :test do
 end
 gem "will_paginate", "= 2.3.12"
 sql_version="= 1.2.5"
-mysql_version="= 2.8.1"
+mysql_specs=["mysql", "= 2.8.1"]
 
 
 
@@ -46,7 +46,7 @@ group :hobo_unit_test do
   gem "yard"
   gem "jeweler"
   gem "rubydoctest", :git => "git://github.com/tablatom/rubydoctest.git", :branch => "master"
-  gem "mysql"
+  gem *mysql_specs
   gem "activerecord-comments", :git => "git://github.com/bryanlarsen/activerecord-comments.git", :branch => "master"
   gem "rubigen", "= 1.3.4"  # compatible with old activesupport
 end

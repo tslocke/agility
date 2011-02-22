@@ -2,7 +2,7 @@ diff --git a/Gemfile b/Gemfile
 index da1c374..9ee4b7b 100644
 --- a/Gemfile
 +++ b/Gemfile
-@@ -1,20 +1,15 @@
+@@ -1,21 +1,16 @@
  source "http://rubygems.org"
  
  # this section of the Gemfile is patched by the rails patches
@@ -26,7 +26,8 @@ index da1c374..9ee4b7b 100644
 -mysql_version="= 2.8.1"
 +gem "will_paginate", "~> 2.0"
 +sql_version="~> 1.0"
-+mysql_version="~> 2.0"
++mysql_specs=["mysql", "~> 2.0"]
+ 
  
  
  

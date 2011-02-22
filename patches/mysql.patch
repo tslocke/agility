@@ -7,7 +7,7 @@ index c2b25d2..8134f93 100644
  
  # this section of the Gemfile is patched by the database patches
 -gem "sqlite3-ruby", sql_version, :require => "sqlite3"
-+gem "mysql", mysql_version
++gem *mysql_specs
  
  
  
