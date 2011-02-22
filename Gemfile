@@ -14,7 +14,7 @@ group :test do
 end
 gem "will_paginate", "= 2.3.12"
 sql_version="= 1.2.5"
-mysql_version="= 2.7.3"
+mysql_version="= 2.8.1"
 
 
 
