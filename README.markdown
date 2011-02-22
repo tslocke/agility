@@ -17,7 +17,13 @@ Hobo itself.
 Integration tests should run with a simple `rake test:integration`
 after you've done the standard `bundle install` and `rake db:migrate`.
 You may also need to do `rake hobo:generate_taglibs` if you've never
-run agility in the development environment.
+run agility in the development environment.  
+
+To run the tests under mysql, copy `config/database.yml.mysql.sample`
+to `config/database.yml.mysql`.  DO NOT TOUCH `config/database.yml`
+directly.  Instead run
+
+    # patch -p1 --merge < patches/mysql.patch
 
 Acceptance tests require a running server and a working browser, so
 are more difficult to run.  To make this easier, we've included an
