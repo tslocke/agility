@@ -14,6 +14,7 @@ function echo_combo {
 }
 
 function patch_up {
+    echo "switching to $RUBY,$RAILS,$DB,$HOBO"
     rm -f Gemfile.lock
     patch -p1 < patches/$RUBY.patch
     patch -p1 < patches/$RAILS.patch
