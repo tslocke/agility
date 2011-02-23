@@ -16,18 +16,18 @@ function echo_combo {
 function patch_up {
     echo "switching to $RUBY,$RAILS,$DB,$HOBO"
     rm -f Gemfile.lock
-    patch -p1 < patches/$RUBY.patch
-    patch -p1 < patches/$RAILS.patch
-    patch -p1 < patches/$DB.patch
-    patch -p1 < patches/$HOBO.patch
+    patch -p1 --merge < patches/$RUBY.patch
+    patch -p1 --merge  < patches/$RAILS.patch
+    patch -p1 --merge  < patches/$DB.patch
+    patch -p1 --merge < patches/$HOBO.patch
     echo "$RUBY,$RAILS,$DB,$HOBO" > current-combo.txt
 }
 
 function patch_down {
-    patch -p1 -R < patches/$HOBO.patch
-    patch -p1 -R < patches/$DB.patch
-    patch -p1 -R < patches/$RAILS.patch
-    patch -p1 -R < patches/$RUBY.patch
+    patch -p1 -R  --merge < patches/$HOBO.patch
+    patch -p1 -R  --merge < patches/$DB.patch
+    patch -p1 -R  --merge < patches/$RAILS.patch
+    patch -p1 -R  --merge < patches/$RUBY.patch
     rm current-combo.txt
 }
 
