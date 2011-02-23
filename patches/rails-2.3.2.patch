@@ -21,7 +21,7 @@ index da1c374..60d808c 100644
 -  gem "rack", "= 1.0.1"
  end
  gem "will_paginate", "= 2.3.12"
- sql_version="= 1.2.5"
+ mysql_specs=["mysql", "= 2.8.1"]
 diff --git a/acceptance_test.sh b/acceptance_test.sh
 index c77e5fb..2455003 100755
 --- a/acceptance_test.sh
