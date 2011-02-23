@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# will split a line from test-combos.txt into RUBY, RAILS, DB, HOBO, GEMSET
+# will split a line from test-combos.txt into RUBY, RAILS, DB, HOBO
 function parse_combo {
     RUBY=`echo $1 | cut -f 1 -d ','`
     RAILS=`echo $1 | cut -f 2 -d ','`
     DB=`echo $1 | cut -f 3 -d ','`
     HOBO=`echo $1 | cut -f 4 -d ','`
-    GEMSET="agility--$HOBO--$RAILS--$DB"
+    GEMSET="hobotest"
 }
 
 function echo_combo {

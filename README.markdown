@@ -84,10 +84,9 @@ libreadline-dev.
 
 ### Create the gemsets
 
-Because we're using bundler, it's not strictly necessary to create a
-separate gemset for each environment.   However, we have found that
-bundler isolation is not perfect for older versions of Rails.  Also
-these isolated gemsets are useful for the Hobo unit tests.
+For test purposes we install our gems into a separate gemset for each
+ruby so we do not pollute your global gemsets.   This gemset will be
+called hobotest.
 
 Create all the gemsets and let bundler populate them
 
