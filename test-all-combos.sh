@@ -22,3 +22,5 @@ for combo in ${combos[*]} ; do
     source acceptance_test.sh
     patch_down
 done
+
+echo "ALL TESTS PASSED SUCCESSFULLY."
