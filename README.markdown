@@ -99,6 +99,15 @@ This will fail if your git is not clean.
 
     ./test-all-combos.sh
 
+You can filter the tests, which just does a grep in test-combos.txt.  A few
+useful examples:
+
+    ./test-all-combos.sh hobo-1.0
+    ./test-all-combos.sh jruby        # tests both jruby's
+    ./test-all-combos.sh jruby-1.5.1
+    ./test-all-combos.sh 1.8.7
+    ./test-all-combos.sh ruby-1.8.7-p249,rails-2.2.2,sqlite3,hobo-1.0
+
 If you test with IE6/7, the first test "Autocomplete and contributors"
 will fail.  This is a problem with the test, not Hobo.  The second test
 "Editors" is flaky.   In both cases the problem is properly waiting

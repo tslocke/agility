@@ -2,9 +2,10 @@
 
 set -e
 
+cd `dirname $0`
 source common_functions.sh
 
-combos=( `cat test-combos.txt` )
+combos=( `grep "$1" test-combos.txt` )
 
 reset_patches
 
