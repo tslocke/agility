@@ -95,6 +95,12 @@ Create all the gemsets and let bundler populate them
 
 This will fail if your git is not clean.
 
+You can rerun `rvm-create-gemsets.sh` whenever you've updated any
+dependencies.
+
+If the only dependency that's been updated is hobo, you can run
+`rvm-update-hobo.sh`, which runs quicker.
+
 ### Run the tests
 
     ./test-all-combos.sh
